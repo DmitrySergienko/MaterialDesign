@@ -72,7 +72,6 @@ class PictureOfTheDayFragment : Fragment() {
                     BottomSheetBehavior.STATE_HIDDEN -> TODO("not implemented")
                     BottomSheetBehavior.STATE_SETTLING -> TODO("not implemented")
                         */
-
                 }
             }
 
@@ -131,7 +130,8 @@ class PictureOfTheDayFragment : Fragment() {
                 "app_bar_settings",
                 Toast.LENGTH_SHORT
             ).show()
-            android.R.id.home -> Toast.makeText(requireContext(), "home", Toast.LENGTH_SHORT).show()
+            android.R.id.home ->
+                BottomNavigationDriverFragment().show(requireActivity().supportFragmentManager,"")
         }
 
         return super.onOptionsItemSelected(item)
