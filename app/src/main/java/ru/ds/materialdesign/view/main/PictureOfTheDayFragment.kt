@@ -37,9 +37,9 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
@@ -51,25 +51,30 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        launchMenuActionBarIcons() // одиваем кноки в меню
-        slideFabOnBottomBar() //move FAB on the Bottom Bar
-
         viewModel.getLiveData().observe(viewLifecycleOwner,
-            { renderData(it) }) // viewLifecycleOwner - подписываемя на обноения пока Fragment "жив"
+                { renderData(it) }) // viewLifecycleOwner - подписываемя на обноения пока Fragment "жив"
         viewModel.sendServerRequest() //вызываем запрос
 
-        //вешаем слушатель на картинку Wiki
+        launchMenuActionBarIcons() // устаналиваем кнопки в меню
+        slideFabOnBottomBar() //move FAB on the Bottom Bar
+        bottomSheetViewUsageVariants() //BottomSheet view usage variants
+        setOnclickWiki() //вешаем слушатель на картинку Wiki
+    }
+
+    private fun setOnclickWiki() {
         binding.inputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
                 data =
-                    Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
+                        Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
             })
         }
-//BottomSheet view usage variants
+    }
+
+    private fun bottomSheetViewUsageVariants() {
         bottomSheetBehavior = BottomSheetBehavior.from(binding.included.bottomSheetContainer)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_SETTLING
         bottomSheetBehavior.addBottomSheetCallback(object :
-            BottomSheetBehavior.BottomSheetCallback() {
+                BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 when (newState) {
                     /*BottomSheetBehavior.STATE_DRAGGING -> TODO("not implemented")
@@ -88,32 +93,31 @@ class PictureOfTheDayFragment : Fragment() {
         })
     }
 
-
     private fun slideFabOnBottomBar() {
         binding.fab.setOnClickListener {
             if (isMain) {
                 binding.bottomAppBar.navigationIcon = null
                 binding.bottomAppBar.fabAlignmentMode =
-                    BottomAppBar.FAB_ALIGNMENT_MODE_END // кнопку двигаем в конец
+                        BottomAppBar.FAB_ALIGNMENT_MODE_END // кнопку двигаем в конец
                 binding.fab.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        requireContext(),
-                        R.drawable.ic_back_fab
-                    )
+                        ContextCompat.getDrawable(
+                                requireContext(),
+                                R.drawable.ic_back_fab
+                        )
                 ) //меняем рисунок кнопки
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)//меняем меню
             } else {
                 binding.bottomAppBar.navigationIcon = ContextCompat.getDrawable(
-                    requireContext(),
-                    R.drawable.ic_hamburger_menu_bottom_bar
+                        requireContext(),
+                        R.drawable.ic_hamburger_menu_bottom_bar
                 )
                 binding.bottomAppBar.fabAlignmentMode =
-                    BottomAppBar.FAB_ALIGNMENT_MODE_CENTER // кнопку двигаем в центр
+                        BottomAppBar.FAB_ALIGNMENT_MODE_CENTER // кнопку двигаем в центр
                 binding.fab.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        requireContext(),
-                        R.drawable.ic_plus_fab
-                    )
+                        ContextCompat.getDrawable(
+                                requireContext(),
+                                R.drawable.ic_plus_fab
+                        )
                 ) //меняем рисунок кнопки
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)//меняем меню
             }
@@ -146,9 +150,9 @@ class PictureOfTheDayFragment : Fragment() {
             is PictureOfTheDayState.Success -> {
                 binding.imageView.load(pictureOfTheDayState.serverResponseData.hdurl) //HD URL
                 binding.included.bottomSheetDescriptionHeader.text =
-                    pictureOfTheDayState.serverResponseData.title
+                        pictureOfTheDayState.serverResponseData.title
                 binding.included.bottomSheetDescription.text =
-                    pictureOfTheDayState.serverResponseData.explanation
+                        pictureOfTheDayState.serverResponseData.explanation
 
             }
         }
@@ -163,11 +167,14 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.app_bar_fav -> Toast.makeText(requireContext(), "app_bar_fav", Toast.LENGTH_SHORT)
-                .show()
+                    .show()
             R.id.app_bar_settings -> {
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container,ChipsFragment.newInstance())
-                    .addToBackStack("")
-                    .commit()
+                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container, ChipsFragment.newInstance())
+                        .addToBackStack("")
+                        .commit()
+                Toast.makeText(requireContext(), "app_bar_fav", Toast.LENGTH_SHORT)
+                        .show()
+
             }
             android.R.id.home ->
                 BottomNavigationDriverFragment().show(requireActivity().supportFragmentManager, "")
