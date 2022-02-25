@@ -7,15 +7,18 @@ import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.api.load
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.snackbar.Snackbar
 import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.FragmentMainBinding
 import ru.ds.materialdesign.utils.showSnackBar
 import ru.ds.materialdesign.view.MainActivity
+import ru.ds.materialdesign.view.chips.ChipsFragment
 import ru.ds.materialdesign.viewModel.PictureOfTheDayState
 import ru.ds.materialdesign.viewModel.PictureOfTheDayViewModel
 
@@ -43,10 +46,14 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private var isMain: Boolean = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        launchMenuActionBarIcons()
+
+        launchMenuActionBarIcons() // одиваем кноки в меню
+        slideFabOnBottomBar() //move FAB on the Bottom Bar
+
         viewModel.getLiveData().observe(viewLifecycleOwner,
             { renderData(it) }) // viewLifecycleOwner - подписываемя на обноения пока Fragment "жив"
         viewModel.sendServerRequest() //вызываем запрос
@@ -79,10 +86,42 @@ class PictureOfTheDayFragment : Fragment() {
                 Log.d("Dimas", "$slideOffset")
             }
         })
-
     }
 
-    //одиваем кноки в меню
+
+    private fun slideFabOnBottomBar() {
+        binding.fab.setOnClickListener {
+            if (isMain) {
+                binding.bottomAppBar.navigationIcon = null
+                binding.bottomAppBar.fabAlignmentMode =
+                    BottomAppBar.FAB_ALIGNMENT_MODE_END // кнопку двигаем в конец
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_back_fab
+                    )
+                ) //меняем рисунок кнопки
+                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)//меняем меню
+            } else {
+                binding.bottomAppBar.navigationIcon = ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_hamburger_menu_bottom_bar
+                )
+                binding.bottomAppBar.fabAlignmentMode =
+                    BottomAppBar.FAB_ALIGNMENT_MODE_CENTER // кнопку двигаем в центр
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_plus_fab
+                    )
+                ) //меняем рисунок кнопки
+                binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)//меняем меню
+            }
+            isMain = !isMain
+        }
+    }
+
+
     private fun launchMenuActionBarIcons() {
         setHasOptionsMenu(true) // для отображения меню
         (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
@@ -94,14 +133,14 @@ class PictureOfTheDayFragment : Fragment() {
                 Toast.makeText(requireContext(), "No server response", Toast.LENGTH_SHORT).show()
             }
             is PictureOfTheDayState.Loading -> {
-               // with(binding) {
-               //     mainFragmentLoadingLayout.visibility = View.VISIBLE
-               //     mainFragmentRoot.showSnackBar(
-               //         "Loading",
-               //         "Reloading",
-               //         { viewModel.sendServerRequest() }
-               //     )
-               // }
+                // with(binding) {
+                //     mainFragmentLoadingLayout.visibility = View.VISIBLE
+                //     mainFragmentRoot.showSnackBar(
+                //         "Loading",
+                //         "Reloading",
+                //         { viewModel.sendServerRequest() }
+                //     )
+                // }
                 Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
             }
             is PictureOfTheDayState.Success -> {
@@ -125,13 +164,13 @@ class PictureOfTheDayFragment : Fragment() {
         when (item.itemId) {
             R.id.app_bar_fav -> Toast.makeText(requireContext(), "app_bar_fav", Toast.LENGTH_SHORT)
                 .show()
-            R.id.app_bar_settings -> Toast.makeText(
-                requireContext(),
-                "app_bar_settings",
-                Toast.LENGTH_SHORT
-            ).show()
+            R.id.app_bar_settings -> {
+                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container,ChipsFragment.newInstance())
+                    .addToBackStack("")
+                    .commit()
+            }
             android.R.id.home ->
-                BottomNavigationDriverFragment().show(requireActivity().supportFragmentManager,"")
+                BottomNavigationDriverFragment().show(requireActivity().supportFragmentManager, "")
         }
 
         return super.onOptionsItemSelected(item)
