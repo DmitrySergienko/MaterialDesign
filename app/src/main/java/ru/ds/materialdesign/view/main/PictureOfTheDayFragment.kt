@@ -136,25 +136,34 @@ class PictureOfTheDayFragment : Fragment() {
     fun renderData(pictureOfTheDayState: PictureOfTheDayState) {
         when (pictureOfTheDayState) {
             is PictureOfTheDayState.Error -> {
-                Toast.makeText(requireContext(), "No server response", Toast.LENGTH_SHORT).show()
-            }
+                with(binding) {
+                    mainFragmentLoadingLayout.visibility = View.VISIBLE
+                    mainFragmentRoot.showSnackBar(
+                            "No server response",
+                            "Reloading",
+                            { viewModel.sendServerRequest() }
+                    )
+                }
+             }
             is PictureOfTheDayState.Loading -> {
-                // with(binding) {
-                //     mainFragmentLoadingLayout.visibility = View.VISIBLE
-                //     mainFragmentRoot.showSnackBar(
-                //         "Loading",
-                //         "Reloading",
-                //         { viewModel.sendServerRequest() }
-                //     )
-                // }
-                Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                 with(binding) {
+                     mainFragmentLoadingLayout.visibility = View.VISIBLE
+                     mainFragmentRoot.showSnackBar(
+                         "Loading",
+                         "Reloading",
+                         { viewModel.sendServerRequest() }
+                     )
+                 }
             }
             is PictureOfTheDayState.Success -> {
-                binding.imageView.load(pictureOfTheDayState.serverResponseData.hdurl) //HD URL
-                binding.included.bottomSheetDescriptionHeader.text =
-                        pictureOfTheDayState.serverResponseData.title
-                binding.included.bottomSheetDescription.text =
-                        pictureOfTheDayState.serverResponseData.explanation
+                with(binding){
+                mainFragmentLoadingLayout.visibility = View.GONE
+                    imageView.load(pictureOfTheDayState.serverResponseData.hdurl) //HD URL
+                    included.bottomSheetDescriptionHeader.text =
+                            pictureOfTheDayState.serverResponseData.title
+                    included.bottomSheetDescription.text =
+                            pictureOfTheDayState.serverResponseData.explanation}
+
 
             }
         }

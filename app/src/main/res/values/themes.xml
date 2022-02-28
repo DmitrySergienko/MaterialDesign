@@ -22,7 +22,7 @@
         <item name="bottomAppBarStyle">@style/myBottomAppBarStyle</item>
         <!-- <item name="chipStyle">@style/myUniqueStyle</item>-->
         <item name="textInputFilledStyle">@font/playball</item>
-        <item name="tabStyle">colorPrimary</item>
+        <!-- <item name="tabStyle">colorPrimary</item>-->
 >
     </style>
 
