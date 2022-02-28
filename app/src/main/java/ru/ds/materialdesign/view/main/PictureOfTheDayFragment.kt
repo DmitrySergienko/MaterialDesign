@@ -96,6 +96,7 @@ class PictureOfTheDayFragment : Fragment() {
     private fun slideFabOnBottomBar() {
         binding.fab.setOnClickListener {
             if (isMain) {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
                 binding.bottomAppBar.navigationIcon = null
                 binding.bottomAppBar.fabAlignmentMode =
                         BottomAppBar.FAB_ALIGNMENT_MODE_END // кнопку двигаем в конец
@@ -107,6 +108,7 @@ class PictureOfTheDayFragment : Fragment() {
                 ) //меняем рисунок кнопки
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)//меняем меню
             } else {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                 binding.bottomAppBar.navigationIcon = ContextCompat.getDrawable(
                         requireContext(),
                         R.drawable.ic_hamburger_menu_bottom_bar
