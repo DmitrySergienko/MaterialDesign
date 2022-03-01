@@ -32,4 +32,7 @@
         <item name="cornerFamily">cut</item>
         <item name="cornerSize">50dp</item>
     </style>
+
+    //Font
+    <style name="myOriginalFont"></style>
 </resources>

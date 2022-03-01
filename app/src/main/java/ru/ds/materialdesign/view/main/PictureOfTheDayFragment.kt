@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -59,6 +60,13 @@ class PictureOfTheDayFragment : Fragment() {
         slideFabOnBottomBar() //move FAB on the Bottom Bar
         bottomSheetViewUsageVariants() //BottomSheet view usage variants
         setOnclickWiki() //вешаем слушатель на картинку Wiki
+
+        binding.btBlack.setOnClickListener {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        binding.btWhite.setOnClickListener {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     private fun setOnclickWiki() {
