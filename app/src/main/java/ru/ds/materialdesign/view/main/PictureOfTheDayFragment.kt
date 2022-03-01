@@ -148,11 +148,7 @@ class PictureOfTheDayFragment : Fragment() {
             is PictureOfTheDayState.Loading -> {
                  with(binding) {
                      mainFragmentLoadingLayout.visibility = View.VISIBLE
-                     mainFragmentRoot.showSnackBar(
-                         "Loading",
-                         "Reloading",
-                         { viewModel.sendServerRequest() }
-                     )
+
                  }
             }
             is PictureOfTheDayState.Success -> {

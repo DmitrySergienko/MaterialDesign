@@ -21,39 +21,12 @@
         <item name="floatingActionButtonStyle">@style/myFloatingActionButtonStyle</item>
         <item name="bottomAppBarStyle">@style/myBottomAppBarStyle</item>
         <!-- <item name="chipStyle">@style/myUniqueStyle</item>-->
-        <item name="textInputFilledStyle">@font/playball</item>
-        <!-- <item name="tabStyle">colorPrimary</item>-->
->
+        <item name="textInputStyle">@font/playball</item>
+        >
     </style>
 
 
-//unique style for FAB
-    <style name="myFloatingActionButtonStyle" parent="Widget.MaterialComponents.FloatingActionButton">
-            <item name="backgroundTint">#5879F3</item>
-    </style>
-
-//unique style for BottomAppBar
-    <style name="myBottomAppBarStyle" parent="Widget.MaterialComponents.BottomAppBar">
-        <item name="backgroundTint">@color/purple_700</item>
-    </style>
-
-    <style name="myUniqueStyle" parent="ShapeAppearance.Material3.SmallComponent">
-        <item name="cornerFamily">cut</item>
-        <item name="boxCornerRadiusBottomEnd">5dp</item>
-
-    </style>
-    
-    <style name="MyChipDesign" parent="Widget.MaterialComponents.Chip.Filter">
-        <item name="shapeAppearanceOverlay">@style/myUniqueStyle</item>
-    </style>
-
-    <style name="myTabStyle" parent="Widget.MaterialComponents.TabLayout">
-
-    </style>
-
-
-
-//-----MyTheme Blue
+    //-----MyTheme Blue
 
     <style name="MyBlueOriginalTheme" parent="Theme.MaterialDesign">
         <!-- Primary brand color. -->
@@ -74,7 +47,10 @@
         <item name="colorAccent">#ef9a9a</item>
         <item name="floatingActionButtonStyle">@style/myFloatingActionButtonStyle</item>
         <item name="bottomAppBarStyle">@style/myBottomAppBarStyle</item>
-        <item name="textInputFilledStyle">@font/belleza</item>
+        <item name="textInputStyle">@font/belleza</item>
+        <item name="tabStyle">@style/myTabStyle</item>
+        <item name="chipStyle">@style/myUniqueChipStyle</item>
+        <item name="materialCardViewStyle">@style/myUniqueCardView</item>
     </style>
 
 
