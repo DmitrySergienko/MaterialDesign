@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider
 import coil.api.load
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.snackbar.Snackbar
 import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.FragmentMainBinding
 import ru.ds.materialdesign.utils.showSnackBar
@@ -22,6 +21,9 @@ import ru.ds.materialdesign.view.MainActivity
 import ru.ds.materialdesign.view.chips.ChipsFragment
 import ru.ds.materialdesign.viewModel.PictureOfTheDayState
 import ru.ds.materialdesign.viewModel.PictureOfTheDayViewModel
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class PictureOfTheDayFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
@@ -56,17 +58,30 @@ class PictureOfTheDayFragment : Fragment() {
                 { renderData(it) }) // viewLifecycleOwner - подписываемя на обноения пока Fragment "жив"
         viewModel.sendServerRequest() //вызываем запрос
 
+        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.yestrday -> {
+                    viewModel.sendServerRequest(takeDate(-1))
+                }
+                R.id.today -> {
+                    viewModel.sendServerRequest()
+                }
+            }
+        }
+
         launchMenuActionBarIcons() // устаналиваем кнопки в меню
         slideFabOnBottomBar() //move FAB on the Bottom Bar
         bottomSheetViewUsageVariants() //BottomSheet view usage variants
         setOnclickWiki() //вешаем слушатель на картинку Wiki
+        themeSwitcher() //Black & White theme switch
+    }
 
-        binding.btBlack.setOnClickListener {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }
-        binding.btWhite.setOnClickListener {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        }
+    private fun takeDate(count: Int): String {
+        val currentDate = Calendar.getInstance()
+        currentDate.add(Calendar.DAY_OF_MONTH, count)
+        val format1 = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        format1.timeZone = TimeZone.getTimeZone("EST")
+        return format1.format(currentDate.time)
     }
 
     private fun setOnclickWiki() {
@@ -135,11 +150,11 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
-
     private fun launchMenuActionBarIcons() {
         setHasOptionsMenu(true) // для отображения меню
         (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
     }
+
 
     fun renderData(pictureOfTheDayState: PictureOfTheDayState) {
         when (pictureOfTheDayState) {
@@ -168,7 +183,6 @@ class PictureOfTheDayFragment : Fragment() {
                     included.bottomSheetDescription.text =
                             pictureOfTheDayState.serverResponseData.explanation}
 
-
             }
         }
 
@@ -177,6 +191,15 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_bottom_bar, menu)
+    }
+
+    private fun themeSwitcher(){
+        binding.btBlack.setOnClickListener {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        binding.btWhite.setOnClickListener {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

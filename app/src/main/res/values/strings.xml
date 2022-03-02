@@ -9,5 +9,6 @@
     <string name="search">Search</string>
     <string name="blackTheme">Black Theme</string>
     <string name="whiteTheme">White Theme</string>
+    <string name="ThemeName">Theme</string>
 
 </resources>
