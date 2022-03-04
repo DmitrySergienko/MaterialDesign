@@ -134,19 +134,33 @@
             app:menu="@menu/menu_bottom_navigation" />
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/btnChip"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Button" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="20dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginEnd="20dp"
+    android:layout_gravity="center"
+    android:orientation="horizontal">
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/btnThemeOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/theme_one"
+            android:textColor="?colorSecondary" />
+
+        <RadioButton
+            android:id="@+id/btnThemeSecond"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/theme_second"
+            android:textColor="?colorSecondary" />
+    </RadioGroup>
     </LinearLayout>
 
 
