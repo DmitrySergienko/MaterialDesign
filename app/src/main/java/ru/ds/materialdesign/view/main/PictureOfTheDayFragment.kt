@@ -54,27 +54,30 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getLiveData().observe(viewLifecycleOwner,
-                { renderData(it) }) // viewLifecycleOwner - подписываемя на обноения пока Fragment "жив"
-        viewModel.sendServerRequest() //вызываем запрос
-
-        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
-            when (checkedId) {
-                R.id.yestrday -> {
-                    viewModel.sendServerRequest(takeDate(-1))
-                }
-                R.id.today -> {
-                    viewModel.sendServerRequest()
-                }
-            }
-        }
-
         launchMenuActionBarIcons() // устаналиваем кнопки в меню
         slideFabOnBottomBar() //move FAB on the Bottom Bar
         bottomSheetViewUsageVariants() //BottomSheet view usage variants
         setOnclickWiki() //вешаем слушатель на картинку Wiki
         themeSwitcher() //Black & White theme switch
+        daySwitcher() //Yesterday or Today switcher
     }
+
+   fun daySwitcher(){
+       viewModel.getLiveData().observe(viewLifecycleOwner,
+               { renderData(it) }) // viewLifecycleOwner - подписываемя на обноения пока Fragment "жив"
+       viewModel.sendServerRequest() //вызываем запрос
+
+       binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
+           when (checkedId) {
+               R.id.yestrday -> {
+                   viewModel.sendServerRequest(takeDate(-1))
+               }
+               R.id.today -> {
+                   viewModel.sendServerRequest()
+               }
+           }
+       }
+   }
 
     private fun takeDate(count: Int): String {
         val currentDate = Calendar.getInstance()
