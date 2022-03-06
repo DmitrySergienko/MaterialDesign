@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MaterialDesign" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme_MaterialDesign" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <!-- Primary brand color. -->
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -15,24 +15,69 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
 
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">#F44336</item>
+        <item name="colorPrimaryDark">#131212</item>
+        <item name="colorAccent">#9C8684</item>
         <item name="floatingActionButtonStyle">@style/myFloatingActionButtonStyle</item>
         <item name="bottomAppBarStyle">@style/myBottomAppBarStyle</item>
+        <!-- <item name="chipStyle">@style/myUniqueStyle</item>-->
+        <item name="textInputStyle">@font/playball</item>
+        >
     </style>
 
-    <color name="colorPrimary">#F44336</color>
-    <color name="colorAccent">#9C8684</color>
-    <color name="colorPrimaryDark">#131212</color>
 
+    //-----MyTheme Blue
 
-    <style name="myFloatingActionButtonStyle" parent="Widget.MaterialComponents.FloatingActionButton">
-            <item name="backgroundTint">#5879F3</item>
+    <style name="MyBlueOriginalTheme" parent="Theme_MaterialDesign">
+        <!-- Primary brand color. -->
+        <item name="colorPrimaryVariant">@color/light_blue_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryBlue</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkBlue</item>
+        <item name="colorAccent">#ef9a9a</item>
+        <item name="floatingActionButtonStyle">@style/myFloatingActionButtonStyle</item>
+        <item name="bottomAppBarStyle">@style/myBottomAppBarStyle</item>
+        <item name="textInputStyle">@font/belleza</item>
+        <item name="tabStyle">@style/myTabStyle</item>
+        <item name="chipStyle">@style/myUniqueChipStyle</item>
+        <item name="materialCardViewStyle">@style/myUniqueCardView</item>
     </style>
 
-    <style name="myBottomAppBarStyle" parent="Widget.MaterialComponents.BottomAppBar">
-        <item name="backgroundTint">@color/purple_700</item>
-    </style>
+    //-----MyTheme Grey
 
+    <style name="MyGreyOriginalTheme" parent="Theme_MaterialDesign">
+        <!-- Primary brand color. -->
+        <item name="colorPrimaryVariant">@color/light_grey_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/light_grey_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryGrey</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkGrey</item>
+        <item name="colorAccent">#ef6c00</item>
+
+        <item name="floatingActionButtonStyle">@style/myFloatingActionButtonStyle</item>
+        <item name="bottomAppBarStyle">@style/myBottomAppBarStyle</item>
+        <item name="textInputStyle">@font/playball</item>
+        <item name="tabStyle">@style/myTabStyle</item>
+        <item name="chipStyle">@style/myUniqueChipStyle</item>
+
+    </style>
 </resources>

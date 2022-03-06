@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -13,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider
 import coil.api.load
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.snackbar.Snackbar
 import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.FragmentMainBinding
 import ru.ds.materialdesign.utils.showSnackBar
@@ -21,6 +21,9 @@ import ru.ds.materialdesign.view.MainActivity
 import ru.ds.materialdesign.view.chips.ChipsFragment
 import ru.ds.materialdesign.viewModel.PictureOfTheDayState
 import ru.ds.materialdesign.viewModel.PictureOfTheDayViewModel
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class PictureOfTheDayFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
@@ -55,10 +58,30 @@ class PictureOfTheDayFragment : Fragment() {
                 { renderData(it) }) // viewLifecycleOwner - подписываемя на обноения пока Fragment "жив"
         viewModel.sendServerRequest() //вызываем запрос
 
+        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.yestrday -> {
+                    viewModel.sendServerRequest(takeDate(-1))
+                }
+                R.id.today -> {
+                    viewModel.sendServerRequest()
+                }
+            }
+        }
+
         launchMenuActionBarIcons() // устаналиваем кнопки в меню
         slideFabOnBottomBar() //move FAB on the Bottom Bar
         bottomSheetViewUsageVariants() //BottomSheet view usage variants
         setOnclickWiki() //вешаем слушатель на картинку Wiki
+        themeSwitcher() //Black & White theme switch
+    }
+
+    private fun takeDate(count: Int): String {
+        val currentDate = Calendar.getInstance()
+        currentDate.add(Calendar.DAY_OF_MONTH, count)
+        val format1 = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        format1.timeZone = TimeZone.getTimeZone("EST")
+        return format1.format(currentDate.time)
     }
 
     private fun setOnclickWiki() {
@@ -96,6 +119,7 @@ class PictureOfTheDayFragment : Fragment() {
     private fun slideFabOnBottomBar() {
         binding.fab.setOnClickListener {
             if (isMain) {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
                 binding.bottomAppBar.navigationIcon = null
                 binding.bottomAppBar.fabAlignmentMode =
                         BottomAppBar.FAB_ALIGNMENT_MODE_END // кнопку двигаем в конец
@@ -107,6 +131,7 @@ class PictureOfTheDayFragment : Fragment() {
                 ) //меняем рисунок кнопки
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)//меняем меню
             } else {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
                 binding.bottomAppBar.navigationIcon = ContextCompat.getDrawable(
                         requireContext(),
                         R.drawable.ic_hamburger_menu_bottom_bar
@@ -125,34 +150,38 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
-
     private fun launchMenuActionBarIcons() {
         setHasOptionsMenu(true) // для отображения меню
         (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
     }
 
+
     fun renderData(pictureOfTheDayState: PictureOfTheDayState) {
         when (pictureOfTheDayState) {
             is PictureOfTheDayState.Error -> {
-                Toast.makeText(requireContext(), "No server response", Toast.LENGTH_SHORT).show()
-            }
+                with(binding) {
+                    mainFragmentLoadingLayout.visibility = View.VISIBLE
+                    mainFragmentRoot.showSnackBar(
+                            "No server response",
+                            "Reloading",
+                            { viewModel.sendServerRequest() }
+                    )
+                }
+             }
             is PictureOfTheDayState.Loading -> {
-                // with(binding) {
-                //     mainFragmentLoadingLayout.visibility = View.VISIBLE
-                //     mainFragmentRoot.showSnackBar(
-                //         "Loading",
-                //         "Reloading",
-                //         { viewModel.sendServerRequest() }
-                //     )
-                // }
-                Toast.makeText(requireContext(), "Loading", Toast.LENGTH_SHORT).show()
+                 with(binding) {
+                     mainFragmentLoadingLayout.visibility = View.VISIBLE
+
+                 }
             }
             is PictureOfTheDayState.Success -> {
-                binding.imageView.load(pictureOfTheDayState.serverResponseData.hdurl) //HD URL
-                binding.included.bottomSheetDescriptionHeader.text =
-                        pictureOfTheDayState.serverResponseData.title
-                binding.included.bottomSheetDescription.text =
-                        pictureOfTheDayState.serverResponseData.explanation
+                with(binding){
+                mainFragmentLoadingLayout.visibility = View.GONE
+                    imageView.load(pictureOfTheDayState.serverResponseData.hdurl) //HD URL
+                    included.bottomSheetDescriptionHeader.text =
+                            pictureOfTheDayState.serverResponseData.title
+                    included.bottomSheetDescription.text =
+                            pictureOfTheDayState.serverResponseData.explanation}
 
             }
         }
@@ -162,6 +191,15 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_bottom_bar, menu)
+    }
+
+    private fun themeSwitcher(){
+        binding.btBlack.setOnClickListener {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        binding.btWhite.setOnClickListener {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

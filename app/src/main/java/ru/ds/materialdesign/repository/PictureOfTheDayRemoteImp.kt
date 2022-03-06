@@ -7,13 +7,18 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class PictureOfTheDayRemoteImp {
 
-    private val baseURL = "https://api.nasa.gov/"
-
-    fun getRetrofitImp():PictureOfTheDayAPI {
-        val retrofit = Retrofit.Builder()
-            .baseUrl(baseURL)
-            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
-            .build()
-        return retrofit.create(PictureOfTheDayAPI::class.java)
+    private val api by lazy {
+        val retrofit = Retrofit
+                .Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
+                .build()
+        retrofit.create(PictureOfTheDayAPI::class.java)
     }
+
+    private val baseUrl = "https://api.nasa.gov/"
+    fun getRetrofitImpl():PictureOfTheDayAPI{
+        return api
+    }
+
 }

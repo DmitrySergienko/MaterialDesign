@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    //unique style for FAB
+    <style name="myFloatingActionButtonStyle" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">#5879F3</item>
+    </style>
+
+    //unique style for BottomAppBar
+    <style name="myBottomAppBarStyle" parent="Widget.MaterialComponents.BottomAppBar">
+        <item name="backgroundTint">@color/purple_700</item>
+    </style>
+
+    //unique style for Chips
+    <style name="myUniqueChipStyle" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="tabIndicatorColor">@color/colorPrimaryDarkBlue</item>
+    </style>
+
+    //unique style for Tabs
+    <style name="myTabStyle" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabIndicatorColor">@color/colorPrimaryDarkBlue</item>
+    </style>
+
+    //unique style Card View
+    <style name="myUniqueCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/colorPrimaryDarkBlue</item>
+        <item name="shapeAppearanceOverlay">@style/myMediumComponentStyle</item>
+    </style>
+
+    //MediumComponentStyle
+    <style name="myMediumComponentStyle" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">50dp</item>
+    </style>
+
+    //Font
+    <style name="myOriginalFont"></style>
+
+
+</resources>

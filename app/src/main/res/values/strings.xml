@@ -7,5 +7,10 @@
     <string name="favourite">favourite</string>
     <string name="settings">settings</string>
     <string name="search">Search</string>
+    <string name="blackTheme">Black Theme</string>
+    <string name="whiteTheme">White Theme</string>
+    <string name="ThemeName">Theme</string>
+    <string name="theme_one">theme_one</string>
+    <string name="theme_second">theme_second</string>
 
 </resources>

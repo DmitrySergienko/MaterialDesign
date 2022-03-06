@@ -12,37 +12,48 @@ import ru.ds.materialdesign.repository.PictureOfTheDayResponseData
 
 class PictureOfTheDayViewModel(
     private val liveData: MutableLiveData<PictureOfTheDayState> = MutableLiveData(),
-    private val pictureOfTheDayRemoteImp: PictureOfTheDayRemoteImp = PictureOfTheDayRemoteImp()
+    private val retrofitImpl: PictureOfTheDayRemoteImp = PictureOfTheDayRemoteImp()
 ): ViewModel() {
 
     fun getLiveData():LiveData<PictureOfTheDayState>{
         return liveData
     }
-    fun sendServerRequest(){
-        liveData.postValue(PictureOfTheDayState.Loading(null))
-        pictureOfTheDayRemoteImp.getRetrofitImp().getPictureOfTheDay(BuildConfig.NASA_API_KEY).enqueue(
-            object : Callback<PictureOfTheDayResponseData>{
-                override fun onResponse(
-                    call: Call<PictureOfTheDayResponseData>,
-                    response: Response<PictureOfTheDayResponseData>
-                ) {
-                    if (response.isSuccessful&&response.body()!=null){
-                        response.body()?.let {
-                            liveData.postValue(PictureOfTheDayState.Success(it))
-                        }
-                    }else{
-                        //TODO HW
-                        //если response body is empty (no picture today)
-                    }
-                }
+    fun sendServerRequest() {
+        liveData.value = PictureOfTheDayState.Loading(0)
+        val apiKey: String = BuildConfig.NASA_API_KEY
+        if (apiKey.isBlank()) {
+            liveData.value = PictureOfTheDayState.Error(Throwable("wrong key"))
+        } else {
+            retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey).enqueue(callback)
+        }
+    }
 
-                override fun onFailure(call: Call<PictureOfTheDayResponseData>, t: Throwable) {
-                    //TODO HW
-                    //Toast.makeText(,"No response from the URL server", Toast.LENGTH_SHORT).show()
-                }
-
+    fun sendServerRequest(date:String) {
+        liveData.value = PictureOfTheDayState.Loading(0)
+        val apiKey: String = BuildConfig.NASA_API_KEY
+        if (apiKey.isBlank()) {
+            liveData.value = PictureOfTheDayState.Error(Throwable("wrong key"))
+        } else {
+            retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey,date).enqueue(callback)
+        }
+    }
+    private val callback = object : Callback<PictureOfTheDayResponseData>{
+        override fun onResponse(
+                call: Call<PictureOfTheDayResponseData>,
+                response: Response<PictureOfTheDayResponseData>
+        ) {
+            if(response.isSuccessful&&response.body()!=null){
+                liveData.value = PictureOfTheDayState.Success(response.body()!!)
+            }else{
+                liveData.value = PictureOfTheDayState.Error(IllegalStateException("Ошибка"))
             }
-        )
+        }
+
+        //https://material.io/components/bottom-navigation/android#theming-a-bottom-navigation-bar
+        override fun onFailure(call: Call<PictureOfTheDayResponseData>, t: Throwable) {
+            liveData.value = PictureOfTheDayState.Error(IllegalStateException("onFailure"))
+        }
 
     }
+
 }
