@@ -7,34 +7,34 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import ru.ds.materialdesign.BuildConfig
-import ru.ds.materialdesign.repository.PictureOfTheDayRemoteImp
+import ru.ds.materialdesign.repository.RetrofitImpl
 import ru.ds.materialdesign.repository.PictureOfTheDayResponseData
 
 class PictureOfTheDayViewModel(
-    private val liveData: MutableLiveData<PictureOfTheDayState> = MutableLiveData(),
-    private val retrofitImpl: PictureOfTheDayRemoteImp = PictureOfTheDayRemoteImp()
+        private val liveData: MutableLiveData<AppState> = MutableLiveData(),
+        private val retrofitImpl: RetrofitImpl = RetrofitImpl()
 ): ViewModel() {
 
-    fun getLiveData():LiveData<PictureOfTheDayState>{
+    fun getLiveData():LiveData<AppState>{
         return liveData
     }
     fun sendServerRequest() {
-        liveData.value = PictureOfTheDayState.Loading(0)
+        liveData.value = AppState.Loading(0)
         val apiKey: String = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
-            liveData.value = PictureOfTheDayState.Error(Throwable("wrong key"))
+            liveData.value = AppState.Error(Throwable("wrong key"))
         } else {
-            retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey).enqueue(callback)
+            retrofitImpl.getPictureOfTheDay().getPictureOfTheDay(apiKey).enqueue(callback)
         }
     }
 
     fun sendServerRequest(date:String) {
-        liveData.value = PictureOfTheDayState.Loading(0)
+        liveData.value = AppState.Loading(0)
         val apiKey: String = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
-            liveData.value = PictureOfTheDayState.Error(Throwable("wrong key"))
+            liveData.value = AppState.Error(Throwable("wrong key"))
         } else {
-            retrofitImpl.getRetrofitImpl().getPictureOfTheDay(apiKey,date).enqueue(callback)
+            retrofitImpl.getPictureOfTheDay().getPictureOfTheDay(apiKey,date).enqueue(callback)
         }
     }
     private val callback = object : Callback<PictureOfTheDayResponseData>{
@@ -43,15 +43,15 @@ class PictureOfTheDayViewModel(
                 response: Response<PictureOfTheDayResponseData>
         ) {
             if(response.isSuccessful&&response.body()!=null){
-                liveData.value = PictureOfTheDayState.Success(response.body()!!)
+                liveData.value = AppState.Success(response.body()!!)
             }else{
-                liveData.value = PictureOfTheDayState.Error(IllegalStateException("Ошибка"))
+                liveData.value = AppState.Error(IllegalStateException("Ошибка"))
             }
         }
 
         //https://material.io/components/bottom-navigation/android#theming-a-bottom-navigation-bar
         override fun onFailure(call: Call<PictureOfTheDayResponseData>, t: Throwable) {
-            liveData.value = PictureOfTheDayState.Error(IllegalStateException("onFailure"))
+            liveData.value = AppState.Error(IllegalStateException("onFailure"))
         }
 
     }

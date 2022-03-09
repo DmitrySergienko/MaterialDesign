@@ -19,7 +19,7 @@ import ru.ds.materialdesign.databinding.FragmentMainBinding
 import ru.ds.materialdesign.utils.showSnackBar
 import ru.ds.materialdesign.view.MainActivity
 import ru.ds.materialdesign.view.chips.ChipsFragment
-import ru.ds.materialdesign.viewModel.PictureOfTheDayState
+import ru.ds.materialdesign.viewModel.AppState
 import ru.ds.materialdesign.viewModel.PictureOfTheDayViewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -159,9 +159,9 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
 
-    fun renderData(pictureOfTheDayState: PictureOfTheDayState) {
+    fun renderData(pictureOfTheDayState: AppState) {
         when (pictureOfTheDayState) {
-            is PictureOfTheDayState.Error -> {
+            is AppState.Error -> {
                 with(binding) {
                     mainFragmentLoadingLayout.visibility = View.VISIBLE
                     mainFragmentRoot.showSnackBar(
@@ -171,13 +171,13 @@ class PictureOfTheDayFragment : Fragment() {
                     )
                 }
              }
-            is PictureOfTheDayState.Loading -> {
+            is AppState.Loading -> {
                  with(binding) {
                      mainFragmentLoadingLayout.visibility = View.VISIBLE
 
                  }
             }
-            is PictureOfTheDayState.Success -> {
+            is AppState.Success -> {
                 with(binding){
                 mainFragmentLoadingLayout.visibility = View.GONE
                     imageView.load(pictureOfTheDayState.serverResponseData.hdurl) //HD URL
