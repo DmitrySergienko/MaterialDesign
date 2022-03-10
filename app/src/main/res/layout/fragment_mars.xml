@@ -22,6 +22,39 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_no_photo_vector" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mars_rover_camera_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/mars_rover_text_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mars_rover_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/mars_camera_name_textV"
+            app:layout_constraintEnd_toEndOf="@+id/mars_rover_camera_text_view"
+            app:layout_constraintStart_toStartOf="@+id/mars_rover_camera_text_view">
+
+        </com.google.android.material.textview.MaterialTextView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/mars_camera_name_textV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/mars_image_view"
+            app:layout_constraintEnd_toEndOf="@+id/mars_rover_text_view"
+            app:layout_constraintStart_toStartOf="@+id/mars_rover_text_view">
+
+        </com.google.android.material.textview.MaterialTextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout

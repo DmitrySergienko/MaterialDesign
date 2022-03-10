@@ -47,6 +47,9 @@ class MarsFragment : Fragment() {
         when(appState){
             is AppState.SuccessMars -> {
             binding.marsImageView.load(appState.serverResponseData.photos.first().imgSrc)
+            binding.marsCameraNameTextV.text = appState.serverResponseData.photos.first().camera.name
+            binding.marsRoverTextView.text = appState.serverResponseData.photos.first().rover.name
+            binding.marsRoverCameraTextView.text = appState.serverResponseData.photos.first().camera.fullName
             }
             is AppState.Loading -> {
                 Toast.makeText(requireContext(),"App Loading", Toast.LENGTH_SHORT).show()
