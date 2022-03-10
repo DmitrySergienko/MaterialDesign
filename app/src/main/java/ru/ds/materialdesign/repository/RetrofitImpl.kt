@@ -5,6 +5,7 @@ import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.ds.materialdesign.repository.dto.mars.MarsPhotosServerResponseData
+import ru.ds.materialdesign.repository.epic.EpicDTO
 
 
 class RetrofitImpl {
@@ -30,5 +31,8 @@ class RetrofitImpl {
     fun getMarsPictureByDate(earth_date: String, apiKey: String, marsCallbackByDate: Callback<MarsPhotosServerResponseData>) {
         api.getMarsImageByDate(earth_date, apiKey).enqueue(marsCallbackByDate)
     }
-
+// Epic
+    fun getEPIC(apiKey: String, epicCallback: Callback<List<EpicDTO>>){
+        api.getEPIC(apiKey).enqueue(epicCallback)
+    }
 }

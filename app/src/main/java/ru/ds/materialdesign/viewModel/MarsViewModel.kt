@@ -24,7 +24,7 @@ class MarsViewModel(
             return liveDataToObserve
         }
     companion object {
-        private const val UNKNOWN_ERROR = "Unidentified error"
+        const val UNKNOWN_ERROR = "Unidentified error"
     }
 
     fun sendServerRequest(){
