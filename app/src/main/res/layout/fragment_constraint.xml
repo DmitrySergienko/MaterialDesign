@@ -35,12 +35,41 @@
         app:layout_constraintWidth_percent="0.5">
 
     </Button>
+    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test"
+        app:layout_constraintStart_toEndOf="@id/barrier"
+        app:layout_constraintTop_toBottomOf="@id/barrier2">
+
+    </androidx.appcompat.widget.AppCompatAutoCompleteTextView>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3"></androidx.constraintlayout.widget.Guideline>
+        app:layout_constraintGuide_percent="0.3">
+
+    </androidx.constraintlayout.widget.Guideline>
+
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="button"
+        >
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="button2"
+        >
+
+    </androidx.constraintlayout.widget.Barrier>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
