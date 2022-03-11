@@ -15,5 +15,7 @@
     <string name="earth">Earth</string>
     <string name="mars">Mars</string>
     <string name="system">System</string>
+    <string name="btnOne">constraint</string>
+    <string name="btnTwo">constrint_2</string>
 
 </resources>

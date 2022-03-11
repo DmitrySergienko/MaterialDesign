@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.BottomNavigationLayoutBinding
+import ru.ds.materialdesign.view.layouts.LayoutActivity
 import ru.ds.materialdesign.view.navigation.BottomNavigationActivity
 import ru.ds.materialdesign.view.navigation.MarsFragment
 import ru.ds.materialdesign.view.navigation.NavigationActivity
@@ -37,6 +38,9 @@ class BottomNavigationDriverFragment  : BottomSheetDialogFragment() {
                 }
                 R.id.navigation_two->{
                     startActivity(Intent(requireContext(), BottomNavigationActivity::class.java))
+                }
+                R.id.navigation_three->{
+                    startActivity(Intent(requireContext(), LayoutActivity::class.java))
                 }
             }
             true
