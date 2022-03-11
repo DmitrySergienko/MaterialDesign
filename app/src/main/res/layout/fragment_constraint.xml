@@ -25,6 +25,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="@string/btnTwo"
+        app:layout_constraintVertical_chainStyle="spread_inside"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.1"
@@ -34,5 +35,12 @@
         app:layout_constraintWidth_percent="0.5">
 
     </Button>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3"></androidx.constraintlayout.widget.Guideline>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
