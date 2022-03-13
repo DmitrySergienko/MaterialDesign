@@ -9,10 +9,11 @@ import retrofit2.Response
 import ru.ds.materialdesign.BuildConfig
 import ru.ds.materialdesign.repository.RetrofitImpl
 import ru.ds.materialdesign.repository.epic.EarthEpicServerResponseData
+import ru.ds.materialdesign.utils.Constant
 import ru.ds.materialdesign.viewModel.MarsViewModel.Companion.UNKNOWN_ERROR
 
 
-private const val API_ERROR = "You need API Key"
+
 
 class EpicViewModel(
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData(),
@@ -22,15 +23,13 @@ class EpicViewModel(
     fun getLiveData(): LiveData<AppState> {
         return liveDataToObserve
     }
-    companion object {
-        private const val UNKNOWN_ERROR_EPIC = "Unidentified error"
-    }
+
 
     fun sendServerRequest(){
         liveDataToObserve.postValue(AppState.Loading)
         val apiKey = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
-            AppState.Error(Throwable(API_ERROR))
+            AppState.Error(Throwable(Constant.API_ERROR))
         } else {
             retrofitImp.getEPIC(apiKey, epicCallback)
         }
