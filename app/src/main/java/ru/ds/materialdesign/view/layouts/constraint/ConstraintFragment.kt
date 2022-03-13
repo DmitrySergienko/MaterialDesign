@@ -1,14 +1,9 @@
-package ru.ds.materialdesign.view.layouts
+package ru.ds.materialdesign.view.layouts.constraint
 
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import ru.ds.materialdesign.R
-import ru.ds.materialdesign.databinding.FragmentChipsBinding
 import ru.ds.materialdesign.databinding.FragmentConstraintBinding
-import ru.ds.materialdesign.databinding.FragmentEarthBinding
-import ru.ds.materialdesign.viewModel.AppState
 
 
 class ConstraintFragment : Fragment() {
@@ -36,6 +31,7 @@ class ConstraintFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+      // binding.groupOne.visibility = View.GONE
     }
 
 

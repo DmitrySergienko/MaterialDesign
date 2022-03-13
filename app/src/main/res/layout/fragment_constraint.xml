@@ -5,6 +5,12 @@
     android:layout_height="match_parent">
 
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupOne"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="button,button2" />
+
     <Button
         android:id="@+id/button"
         android:layout_width="0dp"
@@ -16,9 +22,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button2"
-        app:layout_constraintWidth_percent="0.5">
+        app:layout_constraintWidth_percent="0.5"/>
 
-    </Button>
 
     <Button
         android:id="@+id/button2"
@@ -32,26 +37,22 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.5">
+        app:layout_constraintWidth_percent="0.5"/>
 
-    </Button>
+
     <androidx.appcompat.widget.AppCompatAutoCompleteTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="test"
         app:layout_constraintStart_toEndOf="@id/barrier"
-        app:layout_constraintTop_toBottomOf="@id/barrier2">
-
-    </androidx.appcompat.widget.AppCompatAutoCompleteTextView>
+        app:layout_constraintTop_toBottomOf="@id/barrier2"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.3">
-
-    </androidx.constraintlayout.widget.Guideline>
+        app:layout_constraintGuide_percent="0.3"/>
 
 
     <androidx.constraintlayout.widget.Barrier
@@ -59,17 +60,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="end"
-        app:constraint_referenced_ids="button"
-        >
+        app:constraint_referenced_ids="button" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="button2"
-        >
-
-    </androidx.constraintlayout.widget.Barrier>
+        app:constraint_referenced_ids="button2"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
