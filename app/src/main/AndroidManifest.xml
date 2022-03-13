@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.ds.materialdesign">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -19,24 +19,28 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".view.navigation.NavigationActivity"
+        <activity
+            android:name=".view.navigation.NavigationActivity"
             android:exported="true"> <!-- разрешаем запускать активити из вне -->
 
         </activity>
-        <activity android:name=".view.layouts.LayoutActivity"
+        <activity
+            android:name=".view.layouts.LayoutActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
-        <activity android:name=".view.navigation.BottomNavigationActivity"
+        <activity
+            android:name=".view.navigation.BottomNavigationActivity"
             android:exported="true"> <!-- разрешаем запускать активити из вне -->
 
-
         </activity>
+
     </application>
 
 </manifest>
