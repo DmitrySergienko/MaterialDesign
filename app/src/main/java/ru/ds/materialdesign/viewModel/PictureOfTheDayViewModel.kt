@@ -8,7 +8,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import ru.ds.materialdesign.BuildConfig
 import ru.ds.materialdesign.repository.RetrofitImpl
-import ru.ds.materialdesign.repository.PictureOfTheDayResponseData
+import ru.ds.materialdesign.repository.pictureOfTheDay.PictureOfTheDayResponseData
 
 class PictureOfTheDayViewModel(
         private val liveData: MutableLiveData<AppState> = MutableLiveData(),

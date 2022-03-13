@@ -5,6 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import ru.ds.materialdesign.repository.dto.mars.MarsPhotosServerResponseData
 import ru.ds.materialdesign.repository.epic.EarthEpicServerResponseData
+import ru.ds.materialdesign.repository.pictureOfTheDay.PictureOfTheDayResponseData
 
 
 interface RetrofitApi {

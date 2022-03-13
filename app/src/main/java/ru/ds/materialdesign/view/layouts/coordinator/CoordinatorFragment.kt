@@ -39,9 +39,6 @@ class CoordinatorFragment : Fragment() {
 
     }
 
-
-
-
     companion object {
         @JvmStatic
         fun newInstance() = CoordinatorFragment()

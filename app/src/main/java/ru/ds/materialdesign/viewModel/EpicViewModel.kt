@@ -10,7 +10,7 @@ import ru.ds.materialdesign.BuildConfig
 import ru.ds.materialdesign.repository.RetrofitImpl
 import ru.ds.materialdesign.repository.epic.EarthEpicServerResponseData
 import ru.ds.materialdesign.utils.Constant
-import ru.ds.materialdesign.viewModel.MarsViewModel.Companion.UNKNOWN_ERROR
+
 
 
 
@@ -46,7 +46,7 @@ class EpicViewModel(
             } else {
                 val message = response.message()
                 if (message.isNullOrEmpty()) {
-                    liveDataToObserve.postValue(AppState.Error(Throwable(UNKNOWN_ERROR)))
+                    liveDataToObserve.postValue(AppState.Error(Throwable(Constant.UNKNOWN_ERROR)))
                 } else {
                     liveDataToObserve.postValue(AppState.Error(Throwable(message)))
                 }
