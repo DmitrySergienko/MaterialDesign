@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
 
 @Keep
-data class EpicDTOItem(
+data class EarthEpicServerResponseData(
     @SerializedName("caption")
     val caption: String,
     @SerializedName("date")

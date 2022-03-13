@@ -19,7 +19,7 @@ class PictureOfTheDayViewModel(
         return liveData
     }
     fun sendServerRequest() {
-        liveData.value = AppState.Loading(0)
+        liveData.postValue(AppState.Loading)
         val apiKey: String = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
             liveData.value = AppState.Error(Throwable("wrong key"))
@@ -29,7 +29,7 @@ class PictureOfTheDayViewModel(
     }
 
     fun sendServerRequest(date:String) {
-        liveData.value = AppState.Loading(0)
+        liveData.postValue(AppState.Loading)
         val apiKey: String = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
             liveData.value = AppState.Error(Throwable("wrong key"))

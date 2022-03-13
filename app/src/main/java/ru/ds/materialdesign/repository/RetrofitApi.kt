@@ -4,7 +4,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 import ru.ds.materialdesign.repository.dto.mars.MarsPhotosServerResponseData
-import ru.ds.materialdesign.repository.epic.EpicDTO
+import ru.ds.materialdesign.repository.epic.EarthEpicServerResponseData
 
 
 interface RetrofitApi {
@@ -28,9 +28,11 @@ interface RetrofitApi {
             @Query("api_key") apiKey: String,
     ): Call<MarsPhotosServerResponseData>
 
-    //   get Epic
-    @GET("/epic.gsfc.nasa.gov/api/natural")
+
+    // Earth Polychromatic Imaging Camera
+    @GET("EPIC/api/natural")
     fun getEPIC(
-        @Query("api_key") apiKey: String,
-    ): Call<List<EpicDTO>>
+            @Query("api_key") apiKey: String,
+    ): Call<List<EarthEpicServerResponseData>>
+
 }

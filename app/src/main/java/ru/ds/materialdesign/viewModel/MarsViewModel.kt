@@ -28,9 +28,8 @@ class MarsViewModel(
     }
 
     fun sendServerRequest(){
-
         val earthDate = getDayBeforeYesterday()
-        liveDataToObserve.value = AppState.Loading(0) // отправляем стстояние загрузки
+        liveDataToObserve.postValue(AppState.Loading) // отправляем стстояние загрузки
         val apiKey: String = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
             liveDataToObserve.value = AppState.Error(Throwable("wrong key"))

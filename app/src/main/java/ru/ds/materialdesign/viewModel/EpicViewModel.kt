@@ -8,7 +8,11 @@ import retrofit2.Callback
 import retrofit2.Response
 import ru.ds.materialdesign.BuildConfig
 import ru.ds.materialdesign.repository.RetrofitImpl
-import ru.ds.materialdesign.repository.epic.EpicDTO
+import ru.ds.materialdesign.repository.epic.EarthEpicServerResponseData
+import ru.ds.materialdesign.viewModel.MarsViewModel.Companion.UNKNOWN_ERROR
+
+
+private const val API_ERROR = "You need API Key"
 
 class EpicViewModel(
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData(),
@@ -21,37 +25,39 @@ class EpicViewModel(
     companion object {
         private const val UNKNOWN_ERROR_EPIC = "Unidentified error"
     }
-    fun sendServerRequest(){
 
-        liveDataToObserve.value = AppState.Loading(0) // отправляем стстояние загрузки
-        val apiKey: String = BuildConfig.NASA_API_KEY
+    fun sendServerRequest(){
+        liveDataToObserve.postValue(AppState.Loading)
+        val apiKey = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
-            liveDataToObserve.value = AppState.Error(Throwable("wrong key"))
+            AppState.Error(Throwable(API_ERROR))
         } else {
-            retrofitImp.getEPIC(BuildConfig.NASA_API_KEY,epicCallback)
+            retrofitImp.getEPIC(apiKey, epicCallback)
         }
     }
-    val epicCallback = object : Callback<List<EpicDTO>> {
 
-        override fun onFailure(call: Call<List<EpicDTO>>, t: Throwable) {
-            liveDataToObserve.postValue(AppState.Error(t))
-        }
+      private val epicCallback = object : Callback<List<EarthEpicServerResponseData>> {
 
         override fun onResponse(
-            call: Call<List<EpicDTO>>,
-            response: Response<List<EpicDTO>>
+                call: Call<List<EarthEpicServerResponseData>>,
+                response: Response<List<EarthEpicServerResponseData>>,
         ) {
             if (response.isSuccessful && response.body() != null) {
                 liveDataToObserve.postValue(AppState.SuccessEpic(response.body()!!))
             } else {
                 val message = response.message()
                 if (message.isNullOrEmpty()) {
-                    liveDataToObserve.postValue(AppState.Error(Throwable(EpicViewModel.UNKNOWN_ERROR_EPIC)))
+                    liveDataToObserve.postValue(AppState.Error(Throwable(UNKNOWN_ERROR)))
                 } else {
                     liveDataToObserve.postValue(AppState.Error(Throwable(message)))
                 }
             }
         }
+
+        override fun onFailure(call: Call<List<EarthEpicServerResponseData>>, t: Throwable) {
+            liveDataToObserve.postValue(AppState.Error(t))
+        }
     }
+
 
 }
