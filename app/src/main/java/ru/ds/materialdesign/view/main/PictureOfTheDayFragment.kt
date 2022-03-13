@@ -19,7 +19,7 @@ import ru.ds.materialdesign.databinding.FragmentMainBinding
 import ru.ds.materialdesign.utils.showSnackBar
 import ru.ds.materialdesign.view.MainActivity
 import ru.ds.materialdesign.view.chips.ChipsFragment
-import ru.ds.materialdesign.viewModel.PictureOfTheDayState
+import ru.ds.materialdesign.viewModel.AppState
 import ru.ds.materialdesign.viewModel.PictureOfTheDayViewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -54,27 +54,30 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getLiveData().observe(viewLifecycleOwner,
-                { renderData(it) }) // viewLifecycleOwner - подписываемя на обноения пока Fragment "жив"
-        viewModel.sendServerRequest() //вызываем запрос
-
-        binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
-            when (checkedId) {
-                R.id.yestrday -> {
-                    viewModel.sendServerRequest(takeDate(-1))
-                }
-                R.id.today -> {
-                    viewModel.sendServerRequest()
-                }
-            }
-        }
-
         launchMenuActionBarIcons() // устаналиваем кнопки в меню
         slideFabOnBottomBar() //move FAB on the Bottom Bar
         bottomSheetViewUsageVariants() //BottomSheet view usage variants
         setOnclickWiki() //вешаем слушатель на картинку Wiki
         themeSwitcher() //Black & White theme switch
+        daySwitcher() //Yesterday or Today switcher
     }
+
+   fun daySwitcher(){
+       viewModel.getLiveData().observe(viewLifecycleOwner,
+               { renderData(it) }) // viewLifecycleOwner - подписываемя на обноения пока Fragment "жив"
+       viewModel.sendServerRequest() //вызываем запрос
+
+       binding.chipGroup.setOnCheckedChangeListener { group, checkedId ->
+           when (checkedId) {
+               R.id.yestrday -> {
+                   viewModel.sendServerRequest(takeDate(-1))
+               }
+               R.id.today -> {
+                   viewModel.sendServerRequest()
+               }
+           }
+       }
+   }
 
     private fun takeDate(count: Int): String {
         val currentDate = Calendar.getInstance()
@@ -156,9 +159,9 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
 
-    fun renderData(pictureOfTheDayState: PictureOfTheDayState) {
+    fun renderData(pictureOfTheDayState: AppState) {
         when (pictureOfTheDayState) {
-            is PictureOfTheDayState.Error -> {
+            is AppState.Error -> {
                 with(binding) {
                     mainFragmentLoadingLayout.visibility = View.VISIBLE
                     mainFragmentRoot.showSnackBar(
@@ -168,13 +171,13 @@ class PictureOfTheDayFragment : Fragment() {
                     )
                 }
              }
-            is PictureOfTheDayState.Loading -> {
+            is AppState.Loading -> {
                  with(binding) {
                      mainFragmentLoadingLayout.visibility = View.VISIBLE
 
                  }
             }
-            is PictureOfTheDayState.Success -> {
+            is AppState.Success -> {
                 with(binding){
                 mainFragmentLoadingLayout.visibility = View.GONE
                     imageView.load(pictureOfTheDayState.serverResponseData.hdurl) //HD URL

@@ -12,5 +12,8 @@
     <string name="ThemeName">Theme</string>
     <string name="theme_one">theme_one</string>
     <string name="theme_second">theme_second</string>
+    <string name="earth">Earth</string>
+    <string name="mars">Mars</string>
+    <string name="system">System</string>
 
 </resources>
