@@ -56,6 +56,7 @@ class EarthFragment : Fragment() {
                         ".png?api_key=${BuildConfig.NASA_API_KEY}"
                 binding.epicImageView.load(url)
                 binding.epicTextView1.text = appState.serverResponseData.last().caption
+                binding.epicTextView2.text = appState.serverResponseData.last().date
 
             }
             is AppState.Loading -> {

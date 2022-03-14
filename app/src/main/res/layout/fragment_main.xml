@@ -5,7 +5,9 @@
     android:id="@+id/mainFragmentRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
    >
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
@@ -13,15 +15,46 @@
         android:layout_height="match_parent"
         android:padding="10dp">
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineTop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.04"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineSecond"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.13"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineThree"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.22"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineFore"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.50"/>
+
+
         <Button
             android:id="@+id/btWhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
             android:fontFamily="@font/playball"
             android:text="@string/whiteTheme"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineTop"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btBlack"
+            app:layout_constraintTop_toTopOf="@+id/guidelineTop">
 
         </Button>
 
@@ -29,11 +62,13 @@
             android:id="@+id/btBlack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
             android:fontFamily="@font/playball"
             android:text="@string/blackTheme"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineTop"
+            app:layout_constraintEnd_toStartOf="@+id/btWhite"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="@+id/guidelineTop">
 
         </Button>
 
@@ -41,12 +76,10 @@
             android:id="@+id/chipGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:layout_marginTop="3dp"
-            app:layout_constraintBottom_toTopOf="@+id/inputLayout"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineSecond"
             app:layout_constraintEnd_toEndOf="@+id/btWhite"
             app:layout_constraintStart_toStartOf="@+id/btBlack"
-            app:layout_constraintTop_toBottomOf="@+id/btBlack"
+            app:layout_constraintTop_toTopOf="@+id/guidelineSecond"
             app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
@@ -76,16 +109,16 @@
             app:endIconDrawable="@drawable/ic_wikipedia"
             app:endIconMode="custom"
             app:helperText="@string/wiki_helper_text"
-            app:layout_constraintBottom_toTopOf="@+id/image_view"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineThree"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guidelineThree">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
-
 
 
         <ru.ds.materialdesign.utils.EquilateralImageView
@@ -95,17 +128,16 @@
             android:layout_gravity="center"
 
             android:contentDescription="@string/photo_of_the_day_stub"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guidelineFore"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineFore"
             app:srcCompat="@drawable/ic_no_photo_vector" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-<include
+    <include
     android:id="@+id/included"
     layout="@layout/buttom_sheet_layout"/>
 
@@ -116,6 +148,7 @@
         android:layout_gravity="bottom"
         app:menu="@menu/menu_bottom_bar"
         app:fabAlignmentMode="center"
+        style="@style/BottomNavigationView"
         app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -32,11 +32,11 @@ class BottomNavigationActivity : AppCompatActivity() {
                     binding.bottomNavigationView.removeBadge(R.id.bottom_view_mars) //remove badge when on click
                     true
                 }
-              // R.id.bottom_view_system -> {
-              //     supportFragmentManager.beginTransaction().replace(R.id.container, SystemFragment()).commit()
-                        //     binding.bottomNavigationView.removeBadge(R.id.bottom_view_system) //remove badge when on click
-                        //     true
-                        // }
+              /* R.id.bottom_view_system -> {
+                   supportFragmentManager.beginTransaction().replace(R.id.container, SystemFragment()).commit()
+                             binding.bottomNavigationView.removeBadge(R.id.bottom_view_system) //remove badge when on click
+                             true
+                         }*/
                 else -> true
             }
         }
