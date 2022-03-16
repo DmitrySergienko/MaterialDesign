@@ -7,6 +7,7 @@ import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.ActivityLayoutBinding
 import ru.ds.materialdesign.view.layouts.constraint.ConstraintFragment
 import ru.ds.materialdesign.view.layouts.coordinator.CoordinatorFragment
+import ru.ds.materialdesign.view.layouts.motion.MotionFragment
 
 
 class LayoutActivity : AppCompatActivity() {
@@ -32,7 +33,7 @@ class LayoutActivity : AppCompatActivity() {
                     true
                 }
                 R.id.bottom_motion -> {
-                   // navigationTo(MotionFragment())
+                    navigationTo(MotionFragment())
                     true
                 }
                 else -> true
