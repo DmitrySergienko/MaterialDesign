@@ -12,13 +12,14 @@
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            style="Widget.MaterialComponents.Toolbar.PrimarySurface"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/toolbar">
+            app:toolbarId="@+id/toolbar"
+            >
 
             <ImageView
                 android:id="@+id/main_backdrop"
@@ -55,6 +56,6 @@
         android:text="+"
         android:textSize="50sp"
         app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end"
-        app:layout_behavior=".view.layouts.coordinator.ButtonBehavior"/>
+        app:layout_anchorGravity="top|start"
+       app:layout_behavior=".view.layouts.coordinator.ButtonBehaviorMyStyle"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

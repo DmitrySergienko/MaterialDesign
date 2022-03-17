@@ -34,7 +34,7 @@ class CoordinatorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
                 // прописываем behavior через код
-        val behavior = ButtonBehavior(requireContext())
+        val behavior = ButtonBehaviorMyStyle(requireContext())
         (binding.myButton.getLayoutParams() as CoordinatorLayout.LayoutParams).behavior = behavior
 
     }
