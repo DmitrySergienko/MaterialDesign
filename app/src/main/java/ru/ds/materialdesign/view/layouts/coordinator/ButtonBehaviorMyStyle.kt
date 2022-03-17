@@ -1,6 +1,7 @@
 package ru.ds.materialdesign.view.layouts.coordinator
 
 import android.content.Context
+import android.graphics.Color
 import android.util.AttributeSet
 import android.view.View
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -26,12 +27,20 @@ class ButtonBehaviorMyStyle(context: Context, attr:AttributeSet?=null): Coordina
         val barHeight = bar.height.toFloat()
         val barY = bar.y
 
-        if(abs(barY)>(barHeight*2/3)){
-            child.visibility = View.GONE
 
+        if(abs(barY)>(barHeight*1/2)){
+            child.setBackgroundColor(Color.BLACK)
         }else{
             child.visibility = View.VISIBLE
-            child.alpha = ((barHeight*2/3)-abs(barY/1))/(barHeight*2/3)
+            child.setBackgroundColor(Color.BLUE)
+        }
+
+        if(abs(barY)>(barHeight*4/3)){
+
+            child.visibility = View.GONE
+        }else{
+            child.visibility = View.VISIBLE
+            child.alpha = ((barHeight*4/3)-abs(barY/1))/(barHeight*3/4)
         }
 
         return super.onDependentViewChanged(parent, child, dependency)
