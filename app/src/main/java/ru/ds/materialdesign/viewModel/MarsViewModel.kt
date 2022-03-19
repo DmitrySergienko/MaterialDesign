@@ -10,6 +10,7 @@ import retrofit2.Response
 import ru.ds.materialdesign.BuildConfig
 import ru.ds.materialdesign.repository.RetrofitImpl
 import ru.ds.materialdesign.repository.dto.mars.MarsPhotosServerResponseData
+import ru.ds.materialdesign.utils.Constant
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -23,14 +24,10 @@ class MarsViewModel(
         fun getLiveData():LiveData<AppState>{
             return liveDataToObserve
         }
-    companion object {
-        const val UNKNOWN_ERROR = "Unidentified error"
-    }
 
     fun sendServerRequest(){
-
         val earthDate = getDayBeforeYesterday()
-        liveDataToObserve.value = AppState.Loading(0) // отправляем стстояние загрузки
+        liveDataToObserve.postValue(AppState.Loading) // отправляем стстояние загрузки
         val apiKey: String = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
             liveDataToObserve.value = AppState.Error(Throwable("wrong key"))
@@ -50,7 +47,7 @@ class MarsViewModel(
             } else {
                 val message = response.message()
                 if (message.isNullOrEmpty()) {
-                    liveDataToObserve.postValue(AppState.Error(Throwable(UNKNOWN_ERROR)))
+                    liveDataToObserve.postValue(AppState.Error(Throwable(Constant.UNKNOWN_ERROR)))
                 } else {
                     liveDataToObserve.postValue(AppState.Error(Throwable(message)))
                 }

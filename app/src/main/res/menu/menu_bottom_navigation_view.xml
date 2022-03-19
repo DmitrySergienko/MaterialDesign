@@ -16,11 +16,11 @@
         android:title="@string/mars">
     </item>
 
-    <item
+   <!-- <item
         android:id="@+id/bottom_view_system"
         android:icon="@drawable/ic_system"
         app:tooltipText = "Description"
         android:title="@string/system">
-    </item>
+    </item>-->
 
 </menu>

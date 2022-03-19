@@ -1,4 +1,4 @@
-package ru.ds.materialdesign.repository
+package ru.ds.materialdesign.repository.pictureOfTheDay
 
 import com.google.gson.annotations.SerializedName
 

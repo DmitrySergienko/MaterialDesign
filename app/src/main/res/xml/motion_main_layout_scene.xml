@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/btWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/playball"
+            android:text="@string/whiteTheme"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineTop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btBlack"
+            app:layout_constraintTop_toTopOf="@+id/guidelineTop"/>
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/btWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/playball"
+            android:text="@string/whiteTheme"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineTop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btBlack"
+            app:layout_constraintTop_toTopOf="@+id/guidelineTop" />
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@id/start"
+        app:duration="2000">
+        <OnClick app:targetId="@+id/btWhite" />
+    </Transition>
+</MotionScene>

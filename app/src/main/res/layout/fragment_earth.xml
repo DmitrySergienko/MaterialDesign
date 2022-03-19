@@ -11,10 +11,12 @@
         android:layout_height="match_parent">
 
         <ru.ds.materialdesign.utils.EquilateralImageView
-            android:id="@+id/epic_image_view"
+            android:id="@+id/epicImageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+
+            android:contentDescription="@string/photo_of_the_day_stub"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -22,35 +24,35 @@
             app:srcCompat="@drawable/ic_no_photo_vector" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/epic_text_view_1"
+            android:id="@+id/mars_rover_camera_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/epic_text_view_2"
+            app:layout_constraintBottom_toTopOf="@+id/mars_rover_text_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
         </com.google.android.material.textview.MaterialTextView>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/epic_text_view_2"
+            android:id="@+id/mars_rover_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/epic_text_view_3"
-            app:layout_constraintEnd_toEndOf="@+id/epic_text_view_1"
-            app:layout_constraintStart_toStartOf="@+id/epic_text_view_1">
+            app:layout_constraintBottom_toTopOf="@+id/mars_camera_name_textV"
+            app:layout_constraintEnd_toEndOf="@+id/mars_rover_camera_text_view"
+            app:layout_constraintStart_toStartOf="@+id/mars_rover_camera_text_view">
 
         </com.google.android.material.textview.MaterialTextView>
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/epic_text_view_3"
+            android:id="@+id/mars_camera_name_textV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/epic_image_view"
-            app:layout_constraintEnd_toEndOf="@+id/epic_text_view_2"
-            app:layout_constraintStart_toStartOf="@+id/epic_text_view_2">
+            app:layout_constraintBottom_toTopOf="@+id/mars_image_view"
+            app:layout_constraintEnd_toEndOf="@+id/mars_rover_text_view"
+            app:layout_constraintStart_toStartOf="@+id/mars_rover_text_view">
 
         </com.google.android.material.textview.MaterialTextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -69,7 +71,7 @@
             android:layout_marginLeft="7dp"
             android:layout_marginEnd="7dp"
             android:layout_marginRight="7dp"
-            android:src="@drawable/swipe_indicator_active" />
+            android:src="@drawable/swipe_indicator_active"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -80,14 +82,14 @@
             android:layout_marginRight="7dp"
             android:src="@drawable/swipe_indicator_passive" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="7dp"
-            android:layout_marginLeft="7dp"
-            android:layout_marginEnd="7dp"
-            android:layout_marginRight="7dp"
-            android:src="@drawable/swipe_indicator_passive" />
+        <!-- <ImageView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="7dp"
+             android:layout_marginLeft="7dp"
+             android:layout_marginEnd="7dp"
+             android:layout_marginRight="7dp"
+             android:src="@drawable/swipe_indicator_passive" />-->
     </LinearLayout>
 
 
