@@ -31,7 +31,7 @@ class BottomNavigationDriverFragment  : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.navigationView.setNavigationItemSelectedListener {
+            binding.navigationView.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.navigation_one->{
                     startActivity(Intent(requireContext(),NavigationActivity::class.java))

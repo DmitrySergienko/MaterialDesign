@@ -56,6 +56,6 @@
         android:text="+"
         android:textSize="50sp"
         app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="top|start"
+        app:layout_anchorGravity="bottom|end"
        app:layout_behavior=".view.layouts.coordinator.ButtonBehaviorMyStyle"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

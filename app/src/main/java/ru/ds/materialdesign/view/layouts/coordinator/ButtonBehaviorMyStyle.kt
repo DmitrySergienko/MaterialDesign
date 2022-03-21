@@ -39,8 +39,8 @@ class ButtonBehaviorMyStyle(context: Context, attr:AttributeSet?=null): Coordina
 
             child.visibility = View.GONE
         }else{
-            child.visibility = View.VISIBLE
-            child.alpha = ((barHeight*4/3)-abs(barY/1))/(barHeight*3/4)
+            child.visibility = View.GONE
+            child.alpha = ((barHeight*1)-abs(barY/1))/(barHeight*3/4)
         }
 
         return super.onDependentViewChanged(parent, child, dependency)
