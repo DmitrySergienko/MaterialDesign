@@ -1,62 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/epicRoot">
 
+    <ru.ds.materialdesign.utils.EquilateralImageView
+        android:id="@+id/epicImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:contentDescription="@string/photo_of_the_day_stub"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_no_photo_vector" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
+        android:id="@+id/transparent_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:animateLayoutChanges="true"
+        android:background="@android:color/white"
+        android:clickable="false" />
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ru.ds.materialdesign.utils.EquilateralImageView
-            android:id="@+id/epicImageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-
-            android:contentDescription="@string/photo_of_the_day_stub"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_no_photo_vector" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mars_rover_camera_text_view"
+        <LinearLayout
+            android:id="@+id/option_one_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/mars_rover_text_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:layout_gravity="bottom|end"
+            android:alpha="0"
+            android:clickable="false"
+            android:orientation="horizontal"
+            android:paddingEnd="32dp"
+            android:paddingBottom="32dp">
 
-        </com.google.android.material.textview.MaterialTextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:text="Option 1"
+                android:textStyle="bold" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mars_rover_text_view"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/ic_archive" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/option_two_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/mars_camera_name_textV"
-            app:layout_constraintEnd_toEndOf="@+id/mars_rover_camera_text_view"
-            app:layout_constraintStart_toStartOf="@+id/mars_rover_camera_text_view">
+            android:layout_gravity="bottom|end"
+            android:alpha="0"
+            android:clickable="false"
+            android:orientation="horizontal"
+            android:paddingEnd="32dp"
+            android:paddingBottom="32dp">
 
-        </com.google.android.material.textview.MaterialTextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:text="Option 2"
+                android:textStyle="bold" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/mars_camera_name_textV"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                app:srcCompat="@drawable/ic_send" />
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/mars_image_view"
-            app:layout_constraintEnd_toEndOf="@+id/mars_rover_text_view"
-            app:layout_constraintStart_toStartOf="@+id/mars_rover_text_view">
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:elevation="5dp" />
 
-        </com.google.android.material.textview.MaterialTextView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/plusImageview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:elevation="10dp"
+            app:srcCompat="@drawable/ic_plus_fab" />
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -72,7 +116,7 @@
             android:layout_marginLeft="7dp"
             android:layout_marginEnd="7dp"
             android:layout_marginRight="7dp"
-            android:src="@drawable/swipe_indicator_active"/>
+            android:src="@drawable/swipe_indicator_active" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -83,15 +127,7 @@
             android:layout_marginRight="7dp"
             android:src="@drawable/swipe_indicator_passive" />
 
-        <!-- <ImageView
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_marginStart="7dp"
-             android:layout_marginLeft="7dp"
-             android:layout_marginEnd="7dp"
-             android:layout_marginRight="7dp"
-             android:src="@drawable/swipe_indicator_passive" />-->
+
     </LinearLayout>
-
-
 </FrameLayout>
+

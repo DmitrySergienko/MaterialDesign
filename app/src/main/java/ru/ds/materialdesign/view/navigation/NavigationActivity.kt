@@ -1,7 +1,6 @@
 package ru.ds.materialdesign.view.navigation
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import ru.ds.materialdesign.R
@@ -22,7 +21,7 @@ class NavigationActivity : AppCompatActivity() {
             tab.text = when (position) {
                 EARTH_KEY -> "Earth"
                 MARS_KEY -> "Mars"
-                SYSTEM_KEY -> "System"
+                //SYSTEM_KEY -> "System"
                 else -> "Earth"
             }
         }.attach()
@@ -30,7 +29,7 @@ class NavigationActivity : AppCompatActivity() {
         //устанавливаем кастомную иконку
         binding.tabLayout.getTabAt(0)?.setCustomView(R.layout.activity_navigation_tablayout_item_earth)
         binding.tabLayout.getTabAt(1)?.setCustomView(R.layout.activity_navigation_tablayout_item_mars)
-        binding.tabLayout.getTabAt(2)?.setCustomView(R.layout.activity_navigation_tablayout_item_system)
+        //binding.tabLayout.getTabAt(2)?.setCustomView(R.layout.activity_navigation_tablayout_item_system)
 
 
         //binding.tabLayout.setupWithViewPager(binding.viewPager)

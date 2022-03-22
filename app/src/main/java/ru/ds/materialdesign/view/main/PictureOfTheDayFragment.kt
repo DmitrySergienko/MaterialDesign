@@ -58,14 +58,14 @@ class PictureOfTheDayFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        zoomPicture() // Zoom(crop) picture
         launchMenuActionBarIcons() // устаналиваем кнопки в меню
         slideFabOnBottomBar() //move FAB on the Bottom Bar
         bottomSheetViewUsageVariants() //BottomSheet view usage variants
         setOnclickWiki() //вешаем слушатель на картинку Wiki
         themeSwitcher() //Black & White theme switch
         daySwitcher() //Yesterday or Today switcher
-        zoomPicture() // Zoom(crop) picture
+
 
     }
 

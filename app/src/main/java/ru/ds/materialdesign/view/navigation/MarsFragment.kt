@@ -11,8 +11,6 @@ import androidx.lifecycle.ViewModelProvider
 import coil.api.load
 import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.FragmentMarsBinding
-import ru.ds.materialdesign.databinding.FragmentSystemBinding
-import ru.ds.materialdesign.utils.Constant
 import ru.ds.materialdesign.utils.Constant.DURATION_CROP_ANIMATION_PICTURE
 import ru.ds.materialdesign.viewModel.AppState
 import ru.ds.materialdesign.viewModel.MarsViewModel

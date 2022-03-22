@@ -3,8 +3,8 @@ package ru.ds.materialdesign.view.animations
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.transition.*
-
+import androidx.transition.ChangeImageTransform
+import androidx.transition.TransitionManager
 import ru.ds.materialdesign.databinding.ActivityAnimationsZoomBinding
 
 class AnimationsActivity : AppCompatActivity() {

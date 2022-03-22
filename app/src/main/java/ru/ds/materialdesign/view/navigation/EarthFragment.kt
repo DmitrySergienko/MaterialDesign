@@ -1,5 +1,8 @@
 package ru.ds.materialdesign.view.navigation
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.transition.ChangeImageTransform
 import android.transition.TransitionManager
@@ -20,6 +23,7 @@ import ru.ds.materialdesign.viewModel.EpicViewModel
 class EarthFragment : Fragment() {
 
     var flag = false //zoomPicture()
+    val duration = 1000L
 
     private var _binding: FragmentEarthBinding? = null
     val binding: FragmentEarthBinding
@@ -45,10 +49,72 @@ class EarthFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getLiveData().observe(viewLifecycleOwner,{ renderData(it)})
+        viewModel.getLiveData().observe(viewLifecycleOwner, { renderData(it) })
         viewModel.sendServerRequest()
         zoomPicture() // Zoom(crop) picture
+//setBackgroundColor(getResources().getColor(R.color.design_default_color_error)
+
+        binding.fab.setOnClickListener {
+            flag = !flag
+            if (flag) {
+                ObjectAnimator.ofFloat(binding.plusImageview, View.ROTATION_Y, 0f, 405f).setDuration(duration).start()
+                ObjectAnimator.ofFloat(binding.optionOneContainer, View.TRANSLATION_Y, -50f, -260f).setDuration(duration).start()
+                ObjectAnimator.ofFloat(binding.optionTwoContainer, View.TRANSLATION_Y, -20f, -130f).setDuration(duration).start()
+
+                binding.optionOneContainer.animate()
+                        .alpha(1f)
+                        .setDuration(duration / 2)
+                        .setListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator?) {
+                                super.onAnimationEnd(animation)
+                                binding.optionOneContainer.isClickable = true
+                            }
+                        })
+                binding.optionTwoContainer.animate()
+                        .alpha(1f)
+                        .setDuration(duration / 2)
+                        .setListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator?) {
+                                super.onAnimationEnd(animation)
+                                binding.optionTwoContainer.isClickable = true
+                            }
+                        })
+
+                binding.transparentBackground.animate()
+                        .alpha(0.7f)
+                        .setDuration(duration)
+            } else {
+                ObjectAnimator.ofFloat(binding.plusImageview, View.ROTATION_Y, 405f, 0f).setDuration(duration).start()
+                ObjectAnimator.ofFloat(binding.optionOneContainer, View.TRANSLATION_Y, -260f, -50f).setDuration(duration).start()
+                ObjectAnimator.ofFloat(binding.optionTwoContainer, View.TRANSLATION_Y, -130f, -20f).setDuration(duration).start()
+
+                binding.optionOneContainer.animate()
+                        .alpha(0f)
+                        .setDuration(duration / 2)
+                        .setListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator?) {
+                                super.onAnimationEnd(animation)
+                                binding.optionOneContainer.isClickable = false
+                            }
+                        })
+                binding.optionTwoContainer.animate()
+                        .alpha(0f)
+                        .setDuration(duration / 2)
+                        .setListener(object : AnimatorListenerAdapter() {
+                            override fun onAnimationEnd(animation: Animator?) {
+                                super.onAnimationEnd(animation)
+                                binding.optionTwoContainer.isClickable = false
+                            }
+                        })
+                binding.transparentBackground.animate()
+                        .alpha(0f)
+                        .setDuration(duration)
+
+
+            }
+        }
     }
+
 
     private fun zoomPicture() {
         binding.epicImageView.setOnClickListener {
@@ -59,26 +125,27 @@ class EarthFragment : Fragment() {
             binding.epicImageView.scaleType = if (flag) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.CENTER_INSIDE
         }
     }
-    fun renderData(appState: AppState){
-        when(appState){
+
+    fun renderData(appState: AppState) {
+        when (appState) {
             is AppState.SuccessEpic -> {
                 val strDate = appState.serverResponseData.last().date.split(" ").first()
-                val image =appState.serverResponseData.last().image
+                val image = appState.serverResponseData.last().image
                 val url = "https://api.nasa.gov/EPIC/archive/natural/" +
-                        strDate.replace("-","/",true) +
+                        strDate.replace("-", "/", true) +
                         "/png/" +
                         "$image" +
                         ".png?api_key=${BuildConfig.NASA_API_KEY}"
                 binding.epicImageView.load(url)
-               // binding.epicTextView1.text = appState.serverResponseData.last().caption
-               // binding.epicTextView2.text = appState.serverResponseData.last().date
+                // binding.epicTextView1.text = appState.serverResponseData.last().caption
+                // binding.epicTextView2.text = appState.serverResponseData.last().date
 
             }
             is AppState.Loading -> {
-                Toast.makeText(requireContext(),"App Loading Earth Fragment", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "App Loading Earth Fragment", Toast.LENGTH_SHORT).show()
             }
             is AppState.Error -> {
-                Toast.makeText(requireContext(),"App Error Earth Fragment", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "App Error Earth Fragment", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -88,7 +155,6 @@ class EarthFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu_bottom_bar, menu)
     }
-
 
 
     companion object {

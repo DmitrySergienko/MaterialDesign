@@ -10,7 +10,6 @@ import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.BottomNavigationLayoutBinding
 import ru.ds.materialdesign.view.layouts.LayoutActivity
 import ru.ds.materialdesign.view.navigation.BottomNavigationActivity
-import ru.ds.materialdesign.view.navigation.MarsFragment
 import ru.ds.materialdesign.view.navigation.NavigationActivity
 
 
