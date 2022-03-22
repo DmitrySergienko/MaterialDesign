@@ -16,6 +16,7 @@ import ru.ds.materialdesign.BuildConfig
 import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.FragmentEarthBinding
 import ru.ds.materialdesign.utils.Constant
+import ru.ds.materialdesign.view.MainActivity
 import ru.ds.materialdesign.viewModel.AppState
 import ru.ds.materialdesign.viewModel.EpicViewModel
 
@@ -51,8 +52,14 @@ class EarthFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getLiveData().observe(viewLifecycleOwner, { renderData(it) })
         viewModel.sendServerRequest()
-        zoomPicture() // Zoom(crop) picture
-//setBackgroundColor(getResources().getColor(R.color.design_default_color_error)
+
+        //не ясно почему не срабатывает увеличение картинки для "сегодня"
+            zoomPicture()// Zoom(crop) picture
+
+        binding.scrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+         binding.header.isSelected = binding.scrollView.canScrollVertically(-1)
+         }
+
 
         binding.fab.setOnClickListener {
             flag = !flag
