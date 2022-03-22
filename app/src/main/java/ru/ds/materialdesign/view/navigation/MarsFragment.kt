@@ -1,7 +1,10 @@
 package ru.ds.materialdesign.view.navigation
 
 import android.os.Bundle
+import android.transition.ChangeImageTransform
+import android.transition.TransitionManager
 import android.view.*
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -9,11 +12,14 @@ import coil.api.load
 import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.FragmentMarsBinding
 import ru.ds.materialdesign.databinding.FragmentSystemBinding
+import ru.ds.materialdesign.utils.Constant
+import ru.ds.materialdesign.utils.Constant.DURATION_CROP_ANIMATION_PICTURE
 import ru.ds.materialdesign.viewModel.AppState
 import ru.ds.materialdesign.viewModel.MarsViewModel
 
 class MarsFragment : Fragment() {
 
+    var flag = false
 
     private var _binding: FragmentMarsBinding? = null
     val binding: FragmentMarsBinding
@@ -41,6 +47,18 @@ class MarsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getLiveData().observe(viewLifecycleOwner,{ renderData(it)})
         viewModel.sendServerRequest()
+        zoomPicture() // Zoom(crop) picture
+
+    }
+
+    private fun zoomPicture() {
+        binding.marsImageView.setOnClickListener {
+            val changeBounds = ChangeImageTransform()
+            changeBounds.duration = DURATION_CROP_ANIMATION_PICTURE
+            TransitionManager.beginDelayedTransition(binding.marsFragmentRoot,changeBounds)
+            flag = !flag
+            binding.marsImageView.scaleType = if (flag) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.CENTER_INSIDE
+        }
     }
 
     fun renderData(appState: AppState){

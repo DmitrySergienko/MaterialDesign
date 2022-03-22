@@ -1,7 +1,10 @@
 package ru.ds.materialdesign.view.navigation
 
 import android.os.Bundle
+import android.transition.ChangeImageTransform
+import android.transition.TransitionManager
 import android.view.*
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -9,12 +12,14 @@ import coil.api.load
 import ru.ds.materialdesign.BuildConfig
 import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.FragmentEarthBinding
+import ru.ds.materialdesign.utils.Constant
 import ru.ds.materialdesign.viewModel.AppState
 import ru.ds.materialdesign.viewModel.EpicViewModel
 
 
 class EarthFragment : Fragment() {
 
+    var flag = false //zoomPicture()
 
     private var _binding: FragmentEarthBinding? = null
     val binding: FragmentEarthBinding
@@ -42,8 +47,18 @@ class EarthFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getLiveData().observe(viewLifecycleOwner,{ renderData(it)})
         viewModel.sendServerRequest()
+        zoomPicture() // Zoom(crop) picture
     }
 
+    private fun zoomPicture() {
+        binding.epicImageView.setOnClickListener {
+            val changeBounds = ChangeImageTransform()
+            changeBounds.duration = Constant.DURATION_CROP_ANIMATION_PICTURE
+            TransitionManager.beginDelayedTransition(binding.epicRoot, changeBounds)
+            flag = !flag
+            binding.epicImageView.scaleType = if (flag) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.CENTER_INSIDE
+        }
+    }
     fun renderData(appState: AppState){
         when(appState){
             is AppState.SuccessEpic -> {

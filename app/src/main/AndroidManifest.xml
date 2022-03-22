@@ -38,6 +38,11 @@
 
         </activity>
 
+        <activity android:name=".view.animations.AnimationsActivity"
+            android:exported="true">
+
+        </activity>
+
 
     </application>
 

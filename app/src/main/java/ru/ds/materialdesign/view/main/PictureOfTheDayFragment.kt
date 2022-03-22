@@ -3,8 +3,11 @@ package ru.ds.materialdesign.view.main
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.transition.ChangeImageTransform
+import android.transition.TransitionManager
 import android.util.Log
 import android.view.*
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -16,6 +19,7 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.FragmentMainBinding
+import ru.ds.materialdesign.utils.Constant.DURATION_CROP_ANIMATION_PICTURE
 import ru.ds.materialdesign.utils.showSnackBar
 import ru.ds.materialdesign.view.MainActivity
 import ru.ds.materialdesign.view.chips.ChipsFragment
@@ -33,6 +37,7 @@ class PictureOfTheDayFragment : Fragment() {
     companion object {
         fun newInstance() = PictureOfTheDayFragment()
     }
+    var flag = false
 
     //создаем viewModel
     private val viewModel: PictureOfTheDayViewModel by lazy {
@@ -60,9 +65,21 @@ class PictureOfTheDayFragment : Fragment() {
         setOnclickWiki() //вешаем слушатель на картинку Wiki
         themeSwitcher() //Black & White theme switch
         daySwitcher() //Yesterday or Today switcher
+        zoomPicture() // Zoom(crop) picture
+
     }
 
-   fun daySwitcher(){
+    private fun zoomPicture() {
+        binding.imageView.setOnClickListener {
+            val changeBounds = ChangeImageTransform()
+            changeBounds.duration = DURATION_CROP_ANIMATION_PICTURE
+            TransitionManager.beginDelayedTransition(binding.mainFragmentRoot, changeBounds)
+            flag = !flag
+            binding.imageView.scaleType = if (flag) ImageView.ScaleType.CENTER_CROP else ImageView.ScaleType.CENTER_INSIDE
+        }
+    }
+
+    fun daySwitcher(){
        viewModel.getLiveData().observe(viewLifecycleOwner,
                { renderData(it) }) // viewLifecycleOwner - подписываемя на обноения пока Fragment "жив"
        viewModel.sendServerRequest() //вызываем запрос
