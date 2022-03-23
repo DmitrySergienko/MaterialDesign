@@ -108,5 +108,6 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="statelistanimator_example">StateListAnimator Example</string>
+    <string name="explode">explode</string>
 
 </resources>
