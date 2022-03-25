@@ -4,14 +4,18 @@
         <item
             android:id="@+id/navigation_one"
             android:icon="@drawable/ic_archive"
-            android:title="На экран Navigation" />
+            android:title="Navigation" />
         <item
             android:id="@+id/navigation_two"
             android:icon="@drawable/ic_send"
-            android:title="На экран BottomNavigationActivity" />
+            android:title="BottomNavigationActivity" />
         <item
             android:id="@+id/navigation_three"
             android:icon="@drawable/ic_send"
-            android:title="На экран LayoutActivity" />
+            android:title="LayoutActivity" />
+        <item
+            android:id="@+id/navigation_four"
+            android:icon="@drawable/ic_baseline_list_alt_24"
+            android:title="@string/recycler" />
     </group>
 </menu>

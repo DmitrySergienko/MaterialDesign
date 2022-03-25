@@ -13,7 +13,7 @@ class ViewPagerAdapter(private val fragmentManager:FragmentActivity):
         FragmentStateAdapter(fragmentManager) {
 
     //Хранилище фрагметов
-    private val fragments = arrayOf(EarthFragment(), MarsFragment(), SystemFragment())
+    private val fragments = arrayOf(EarthFragment(), MarsFragment())
 
     override fun getItemCount()= fragments.size // return quantity elements
 

@@ -21,7 +21,7 @@ class NavigationActivity : AppCompatActivity() {
             tab.text = when (position) {
                 EARTH_KEY -> "Earth"
                 MARS_KEY -> "Mars"
-                //SYSTEM_KEY -> "System"
+
                 else -> "Earth"
             }
         }.attach()
@@ -37,8 +37,6 @@ class NavigationActivity : AppCompatActivity() {
         //binding.tabLayout.getTabAt(0)?.setIcon(R.drawable.ic_earth)
         //binding.tabLayout.getTabAt(1)?.setIcon(R.drawable.ic_mars)
         //binding.tabLayout.getTabAt(2)?.setIcon(R.drawable.ic_system)
-
-
 
 
     }

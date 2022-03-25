@@ -2,8 +2,8 @@
     <string name="app_name">MaterialDesign</string>
 
     <string name="photo_of_the_day_stub">Photo of the day</string>
-    <string name="search_wiki">Найти в Википедии</string>
-    <string name="wiki_helper_text">Поищите термин в википедии</string>
+    <string name="search_wiki">Search</string>
+    <string name="wiki_helper_text">Search in Wiki</string>
     <string name="favourite">favourite</string>
     <string name="settings">settings</string>
     <string name="search">Search</string>
@@ -109,5 +109,8 @@
     </string>
     <string name="statelistanimator_example">StateListAnimator Example</string>
     <string name="explode">explode</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="today">Today</string>
+    <string name="recycler">RecyclerView</string>
 
 </resources>

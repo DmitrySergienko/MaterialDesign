@@ -2,6 +2,7 @@ package ru.ds.materialdesign.view.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils.replace
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +11,15 @@ import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.BottomNavigationLayoutBinding
 import ru.ds.materialdesign.view.layouts.LayoutActivity
 import ru.ds.materialdesign.view.navigation.BottomNavigationActivity
+import ru.ds.materialdesign.view.navigation.MarsFragment
 import ru.ds.materialdesign.view.navigation.NavigationActivity
+import ru.ds.materialdesign.view.recycler.RecyclerFragment
 
 
 class BottomNavigationDriverFragment  : BottomSheetDialogFragment() {
     private var _binding: BottomNavigationLayoutBinding? = null
     private val binding: BottomNavigationLayoutBinding
         get() = _binding!!
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +42,14 @@ class BottomNavigationDriverFragment  : BottomSheetDialogFragment() {
                 }
                 R.id.navigation_three->{
                     startActivity(Intent(requireContext(), LayoutActivity::class.java))
+                }
+                R.id.navigation_four->{
+                    val manager = activity?.supportFragmentManager
+                    manager?.beginTransaction()
+                            ?.replace(R.id.container,RecyclerFragment.newInstance())
+                            //?.addToBackStack()
+                            ?.commitAllowingStateLoss()
+
                 }
             }
             true
