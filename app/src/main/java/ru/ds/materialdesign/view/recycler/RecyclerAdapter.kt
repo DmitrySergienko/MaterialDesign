@@ -1,9 +1,15 @@
 package ru.ds.materialdesign.view.recycler
 
+import android.provider.Settings.Global.getInt
+import android.provider.Settings.Global.getString
+import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.FragmenRecyclerItemEarthBinding
 import ru.ds.materialdesign.databinding.FragmentRecyclerItemHeaderBinding
 import ru.ds.materialdesign.databinding.FragmentRecyclerItemMarsBinding
@@ -54,6 +60,28 @@ class RecyclerAdapter(val onClickItemListener: OnClickItemListener) : RecyclerVi
                 removeItemImageView.setOnClickListener {
                     listData.removeAt(layoutPosition)
                     notifyItemRemoved(layoutPosition)
+                }
+                moveItemUp.setOnClickListener {
+                    if (getLayoutPosition() == 1) {
+                        listData.removeAt(layoutPosition).apply {
+                            listData.add(layoutPosition + 0, this)
+                            notifyItemMoved(layoutPosition, layoutPosition + 0)
+                        }
+                    } else {
+                        listData.removeAt(layoutPosition).apply {
+                            listData.add(layoutPosition - 1, this)
+                            notifyItemMoved(layoutPosition, layoutPosition - 1)
+                        }
+                    }
+                }
+
+
+                moveItemDown.setOnClickListener {
+
+                    listData.removeAt(layoutPosition).apply {
+                        listData.add(layoutPosition+1,this)
+                    }
+                    notifyItemMoved(layoutPosition,layoutPosition+1)
                 }
             }
         }
