@@ -10,8 +10,8 @@ import ru.ds.materialdesign.databinding.FragmentRecyclerItemMarsBinding
 
 class RecyclerAdapter(val onClickItemListener: OnClickItemListener) : RecyclerView.Adapter<RecyclerAdapter.BaseViewHolder>() {
 
-    private lateinit var listData: List<Data>
-    fun setData(listData: List<Data>) {
+    private lateinit var listData: MutableList<Data>
+    fun setData(listData: MutableList<Data>) {
         this.listData = listData
     }
 
@@ -29,6 +29,24 @@ class RecyclerAdapter(val onClickItemListener: OnClickItemListener) : RecyclerVi
             else -> {
                 val binding = FragmentRecyclerItemMarsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
                 MarsViewHolder(binding.root)
+            }
+        }
+    }
+
+    fun appendItem() {
+        listData.add(generateData())
+        //notifyDataSetChanged()
+        notifyItemInserted(listData.size-1)
+    }
+    fun generateData() = Data("Mars", type=TYPE_MARS)
+
+    inner class MarsViewHolder(view:View):BaseViewHolder(view){
+        override fun bind(data: Data){
+            FragmentRecyclerItemMarsBinding.bind(itemView).apply {
+                tvName.text = data.name
+                ivMars.setOnClickListener {
+                    onClickItemListener.onItemClick(data)
+                }
             }
         }
     }
@@ -57,16 +75,6 @@ class RecyclerAdapter(val onClickItemListener: OnClickItemListener) : RecyclerVi
         }
     }
 
-    inner class MarsViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Data) {
-            FragmentRecyclerItemMarsBinding.bind(itemView).apply {
-                tvName.text = data.name
-                ivMars.setOnClickListener {
-                    onClickItemListener.onItemClick(data)
-                }
-            }
-        }
-    }
 
     inner class HeaderViewHolder(view: View) : BaseViewHolder(view) {
         override fun bind(data: Data) {

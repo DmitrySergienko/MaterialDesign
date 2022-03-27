@@ -50,6 +50,7 @@ class RecyclerFragment : Fragment() {
         })
         adapter.setData(listData)
         binding.recyclerView.adapter = adapter
+        binding.recyclerActivityFAB.setOnClickListener { adapter.appendItem() }
     }
 
     companion object {
