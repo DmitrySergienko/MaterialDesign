@@ -18,6 +18,7 @@ class RecyclerFragment : Fragment() {
     private var _binding: FragmentRecyclerBinding? = null
     val binding: FragmentRecyclerBinding
         get() = _binding!!
+    lateinit var itemTouchHelper:ItemTouchHelper
 
     val listData = arrayListOf(
             Pair(Data("Earth","Text"),false),
@@ -45,7 +46,12 @@ class RecyclerFragment : Fragment() {
         listData.add(0, Pair(Data(getString(R.string.header), type = TYPE_HEADER), false))
         val adapter = RecyclerAdapter(object : OnClickItemListener {
             override fun onItemClick(data: Data) {
-                Toast.makeText(requireContext(), "Тест ${data.name}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Тест ${data.name}", Toast.LENGTH_SHORT)
+                        .show()
+            }
+        }, object: OnStartDragListener{
+            override fun onStartDrag(viewHolder: RecyclerView.ViewHolder) {
+                itemTouchHelper.startDrag(viewHolder)
             }
         })
         adapter.setData(listData)
@@ -54,7 +60,9 @@ class RecyclerFragment : Fragment() {
             adapter.appendItem()
             binding.recyclerView.smoothScrollToPosition(adapter.itemCount)
         }
-        ItemTouchHelper(ItemTouchHelperCallback(adapter)).attachToRecyclerView(binding.recyclerView)
+
+        itemTouchHelper = ItemTouchHelper(ItemTouchHelperCallback(adapter))
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
     }
     class ItemTouchHelperCallback(val recyclerAdapter:RecyclerAdapter):ItemTouchHelper.Callback() {
         override fun getMovementFlags(

@@ -2,7 +2,6 @@ package ru.ds.materialdesign.view.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils.replace
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.BottomNavigationLayoutBinding
 import ru.ds.materialdesign.view.layouts.LayoutActivity
 import ru.ds.materialdesign.view.navigation.BottomNavigationActivity
-import ru.ds.materialdesign.view.navigation.MarsFragment
 import ru.ds.materialdesign.view.navigation.NavigationActivity
 import ru.ds.materialdesign.view.recycler.RecyclerFragment
 
@@ -52,6 +50,7 @@ class BottomNavigationDriverFragment  : BottomSheetDialogFragment() {
 
                 }
             }
+                dismiss()
             true
         }
     }
