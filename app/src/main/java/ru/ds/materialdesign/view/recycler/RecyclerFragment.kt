@@ -18,15 +18,13 @@ class RecyclerFragment : Fragment() {
         get() = _binding!!
 
     val listData = arrayListOf(
-            Data("Earth","Text"),
-            Data("Earth","Text"),
-            Data("Earth","Text"),
-            Data("Earth","Text"),
-            Data("Earth","Text"),
-            Data("Earth","Text"),
-            Data("Mars",type = TYPE_MARS),
-            Data("Mars",type = TYPE_MARS),
-            Data("Mars",type = TYPE_MARS),
+            Pair(Data("Earth","Text"),false),
+            Pair(Data("Earth","Text"),false),
+            Pair(Data("Earth","Text"),false),
+            Pair(Data("Earth","Text"),false),
+            Pair(Data("Mars",type = TYPE_MARS),false),
+            Pair(Data("Mars",type = TYPE_MARS),false),
+            Pair(Data("Mars",type = TYPE_MARS),false),
     )
 
     override fun onCreateView(
@@ -42,7 +40,7 @@ class RecyclerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         listData.shuffle()
-        listData.add(0,Data(getString(R.string.header), type= TYPE_HEADER))
+        listData.add(0,Pair(Data(getString(R.string.header), type= TYPE_HEADER),false))
         val adapter = RecyclerAdapter(object :OnClickItemListener{
             override fun onItemClick(data: Data) {
                 Toast.makeText(requireContext(),"Тест ${data.name}",Toast.LENGTH_SHORT).show()

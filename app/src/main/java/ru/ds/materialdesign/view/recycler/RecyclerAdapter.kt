@@ -1,23 +1,17 @@
 package ru.ds.materialdesign.view.recycler
 
-import android.provider.Settings.Global.getInt
-import android.provider.Settings.Global.getString
-import android.speech.tts.TextToSpeech
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.FragmenRecyclerItemEarthBinding
 import ru.ds.materialdesign.databinding.FragmentRecyclerItemHeaderBinding
 import ru.ds.materialdesign.databinding.FragmentRecyclerItemMarsBinding
 
 class RecyclerAdapter(val onClickItemListener: OnClickItemListener) : RecyclerView.Adapter<RecyclerAdapter.BaseViewHolder>() {
 
-    private lateinit var listData: MutableList<Data>
-    fun setData(listData: MutableList<Data>) {
+    private lateinit var listData: MutableList<Pair<Data,Boolean>>
+    fun setData(listData: MutableList<Pair<Data,Boolean>>) {
         this.listData = listData
     }
 
@@ -25,7 +19,10 @@ class RecyclerAdapter(val onClickItemListener: OnClickItemListener) : RecyclerVi
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         return when (viewType) {
             TYPE_EARTH -> {
-                val binding = FragmenRecyclerItemEarthBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                val binding = FragmenRecyclerItemEarthBinding.inflate(
+                        LayoutInflater.from(parent.context),
+                        parent,
+                        false)
                 EarthViewHolder(binding.root)
             }
             TYPE_HEADER -> {
@@ -44,14 +41,15 @@ class RecyclerAdapter(val onClickItemListener: OnClickItemListener) : RecyclerVi
         //notifyDataSetChanged()
         notifyItemInserted(listData.size-1)
     }
-    fun generateData() = Data("Mars", type=TYPE_MARS)
+
+    fun generateData() = Pair(Data("Mars", type=TYPE_MARS),false)
 
     inner class MarsViewHolder(view:View):BaseViewHolder(view){
-        override fun bind(data: Data){
+        override fun bind(data: Pair<Data,Boolean>){
             FragmentRecyclerItemMarsBinding.bind(itemView).apply {
-                tvName.text = data.name
+                tvName.text = data.first.name
                 ivMars.setOnClickListener {
-                    onClickItemListener.onItemClick(data)
+                    onClickItemListener.onItemClick(data.first)
                 }
                 addItemImageView.setOnClickListener {
                     listData.add(layoutPosition,generateData())
@@ -75,13 +73,19 @@ class RecyclerAdapter(val onClickItemListener: OnClickItemListener) : RecyclerVi
                     }
                 }
 
-
                 moveItemDown.setOnClickListener {
 
                     listData.removeAt(layoutPosition).apply {
                         listData.add(layoutPosition+1,this)
                     }
                     notifyItemMoved(layoutPosition,layoutPosition+1)
+                }
+                marsDescriptionTextView.visibility =if(listData[layoutPosition].second)View.VISIBLE else View.GONE
+                itemView.setOnClickListener {
+                    listData[layoutPosition] =listData[layoutPosition].let {
+                        it.first to !it.second
+                    }
+                    notifyItemChanged(layoutPosition)
                 }
             }
         }
@@ -94,18 +98,18 @@ class RecyclerAdapter(val onClickItemListener: OnClickItemListener) : RecyclerVi
 
     //Так как разные типы переопределяем функцию getItemViewType
     override fun getItemViewType(position: Int): Int {
-        return listData[position].type
+        return listData[position].first.type
     }
 
     override fun getItemCount() = listData.size
 
     inner class EarthViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Data) {
+        override fun bind(data: Pair<Data,Boolean>) {
             FragmenRecyclerItemEarthBinding.bind(itemView).apply {
-                tvName.text = data.name
-                tvDescription.text = data.description
+                tvName.text = data.first.name
+                tvDescription.text = data.first.description
                 ivEarth.setOnClickListener {
-                    onClickItemListener.onItemClick(data)
+                    onClickItemListener.onItemClick(data.first)
                 }
             }
         }
@@ -113,17 +117,17 @@ class RecyclerAdapter(val onClickItemListener: OnClickItemListener) : RecyclerVi
 
 
     inner class HeaderViewHolder(view: View) : BaseViewHolder(view) {
-        override fun bind(data: Data) {
+        override fun bind(data: Pair<Data,Boolean>) {
             FragmentRecyclerItemHeaderBinding.bind(itemView).apply {
-                tvName.text = data.name
-                onClickItemListener.onItemClick(data)
+                tvName.text = data.first.name
+                onClickItemListener.onItemClick(data.first)
             }
         }
     }
 
 
     abstract class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        abstract fun bind(data: Data)
+        abstract fun bind(data: Pair<Data,Boolean>)
     }
 }
 
