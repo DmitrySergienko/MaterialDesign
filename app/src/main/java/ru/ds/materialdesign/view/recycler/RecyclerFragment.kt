@@ -50,7 +50,8 @@ class RecyclerFragment : Fragment() {
         })
         adapter.setData(listData)
         binding.recyclerView.adapter = adapter
-        binding.recyclerActivityFAB.setOnClickListener { adapter.appendItem() }
+        binding.recyclerActivityFAB.setOnClickListener { adapter.appendItem()
+            binding.recyclerView.smoothScrollToPosition(adapter.itemCount)}
     }
 
     companion object {

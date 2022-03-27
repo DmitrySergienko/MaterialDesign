@@ -47,6 +47,14 @@ class RecyclerAdapter(val onClickItemListener: OnClickItemListener) : RecyclerVi
                 ivMars.setOnClickListener {
                     onClickItemListener.onItemClick(data)
                 }
+                addItemImageView.setOnClickListener {
+                    listData.add(layoutPosition,generateData())
+                    notifyItemInserted(layoutPosition)
+                }
+                removeItemImageView.setOnClickListener {
+                    listData.removeAt(layoutPosition)
+                    notifyItemRemoved(layoutPosition)
+                }
             }
         }
     }
