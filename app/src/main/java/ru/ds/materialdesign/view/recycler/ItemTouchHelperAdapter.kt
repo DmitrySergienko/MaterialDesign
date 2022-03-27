@@ -9,6 +9,7 @@ interface ItemTouchHelperAdapter {
 }
 
 interface ItemTouchHelperViewHolder {
+
     fun onItemSelected()
     fun onItemClear()
 }

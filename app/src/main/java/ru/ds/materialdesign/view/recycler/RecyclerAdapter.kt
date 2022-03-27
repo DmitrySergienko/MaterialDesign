@@ -8,8 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.ds.materialdesign.databinding.FragmenRecyclerItemEarthBinding
 import ru.ds.materialdesign.databinding.FragmentRecyclerItemHeaderBinding
 import ru.ds.materialdesign.databinding.FragmentRecyclerItemMarsBinding
+import android.view.MotionEvent
+import androidx.core.view.MotionEventCompat
 
-class RecyclerAdapter(val onClickItemListener: OnClickItemListener) :
+class RecyclerAdapter(val onClickItemListener: OnClickItemListener, val onStartDragListener: OnStartDragListener) :
         RecyclerView.Adapter<RecyclerAdapter.BaseViewHolder>(),
         ItemTouchHelperAdapter {
 
@@ -90,6 +92,13 @@ class RecyclerAdapter(val onClickItemListener: OnClickItemListener) :
                         it.first to !it.second
                     }
                     notifyItemChanged(layoutPosition)
+                }
+
+                dragHandleImageView.setOnTouchListener { v, event ->
+                    if(MotionEventCompat.getActionMasked(event)==MotionEvent.ACTION_DOWN){
+                        onStartDragListener.onStartDrag(this@MarsViewHolder)
+                    }
+                    false
                 }
             }
         }
