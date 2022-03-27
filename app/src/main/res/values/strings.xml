@@ -112,5 +112,6 @@
     <string name="yesterday">Yesterday</string>
     <string name="today">Today</string>
     <string name="recycler">RecyclerView</string>
+    <string name="header">Header</string>
 
 </resources>

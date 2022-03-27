@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.FragmentRecyclerBinding
 
 
@@ -16,7 +17,7 @@ class RecyclerFragment : Fragment() {
     val binding: FragmentRecyclerBinding
         get() = _binding!!
 
-    val data = arrayListOf(
+    val listData = arrayListOf(
             Data("Earth","Text"),
             Data("Earth","Text"),
             Data("Earth","Text"),
@@ -40,14 +41,14 @@ class RecyclerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        data.shuffle() //shuffle items in the recycle list
-
+        listData.shuffle()
+        listData.add(0,Data(getString(R.string.header), type= TYPE_HEADER))
         val adapter = RecyclerAdapter(object :OnClickItemListener{
             override fun onItemClick(data: Data) {
-                Toast.makeText(requireContext(),"Мы супер ${data.name}",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),"Тест ${data.name}",Toast.LENGTH_SHORT).show()
             }
         })
-        adapter.setData(data)
+        adapter.setData(listData)
         binding.recyclerView.adapter = adapter
     }
 

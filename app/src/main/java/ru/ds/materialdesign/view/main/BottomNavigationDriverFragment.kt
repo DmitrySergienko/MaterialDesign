@@ -47,7 +47,7 @@ class BottomNavigationDriverFragment  : BottomSheetDialogFragment() {
                     val manager = activity?.supportFragmentManager
                     manager?.beginTransaction()
                             ?.replace(R.id.container,RecyclerFragment.newInstance())
-                            //?.addToBackStack()
+                            ?.addToBackStack("_")
                             ?.commitAllowingStateLoss()
 
                 }
