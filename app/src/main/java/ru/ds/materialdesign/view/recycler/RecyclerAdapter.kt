@@ -1,6 +1,5 @@
 package ru.ds.materialdesign.view.recycler
 
-import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -11,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.ds.materialdesign.databinding.FragmenRecyclerItemEarthBinding
 import ru.ds.materialdesign.databinding.FragmentRecyclerItemHeaderBinding
 import ru.ds.materialdesign.databinding.FragmentRecyclerItemMarsBinding
+import android.view.MotionEvent
+import androidx.core.view.MotionEventCompat
 
 class RecyclerAdapter(val onClickItemListener: OnClickItemListener, val onStartDragListener: OnStartDragListener) :
         RecyclerView.Adapter<RecyclerAdapter.BaseViewHolder>(),
@@ -95,9 +96,9 @@ class RecyclerAdapter(val onClickItemListener: OnClickItemListener, val onStartD
                     }
                     notifyItemChanged(layoutPosition)
                 }
-                    //происходит именно событие нажимания event, ACTION DOWN по нажатию на кнопку
+
                 dragHandleImageView.setOnTouchListener { v, event ->
-                    if(MotionEventCompat.getActionMasked(event)==MotionEvent.ACTION_DOWN) {
+                    if(MotionEventCompat.getActionMasked(event)==MotionEvent.ACTION_DOWN){
                         onStartDragListener.onStartDrag(this@MarsViewHolder)
                     }
                     false

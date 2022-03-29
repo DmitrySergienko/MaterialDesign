@@ -8,5 +8,5 @@ interface OnClickItemListener {
 }
 
 fun interface OnStartDragListener {
-    fun onStartDrag(view: RecyclerView.ViewHolder) // двигаем все элементы RecyclerView.ViewHolder
+    fun onStartDrag(view: RecyclerView.ViewHolder)
 }
