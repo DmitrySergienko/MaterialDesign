@@ -12,7 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme_MaterialDesign">
         <activity android:name=".view.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <meta-data
@@ -25,16 +29,17 @@
         </activity>
         <activity android:name=".view.layouts.LayoutActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".view.navigation.BottomNavigationActivity"
             android:exported="true"> <!-- разрешаем запускать активити из вне -->
 
+
+        </activity>
+
+        <activity android:name=".view.animations.AnimationsActivity"
+            android:exported="true">
 
         </activity>
 

@@ -1,8 +1,8 @@
 package ru.ds.materialdesign.repository.dto.mars
 
 
-import com.google.gson.annotations.SerializedName
 import androidx.annotation.Keep
+import com.google.gson.annotations.SerializedName
 
 @Keep
 data class MarsPhotosServerResponseData(

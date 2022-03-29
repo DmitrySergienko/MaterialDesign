@@ -10,7 +10,6 @@ import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.BottomNavigationLayoutBinding
 import ru.ds.materialdesign.view.layouts.LayoutActivity
 import ru.ds.materialdesign.view.navigation.BottomNavigationActivity
-import ru.ds.materialdesign.view.navigation.MarsFragment
 import ru.ds.materialdesign.view.navigation.NavigationActivity
 
 
@@ -31,7 +30,7 @@ class BottomNavigationDriverFragment  : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.navigationView.setNavigationItemSelectedListener {
+            binding.navigationView.setNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.navigation_one->{
                     startActivity(Intent(requireContext(),NavigationActivity::class.java))

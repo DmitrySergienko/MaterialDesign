@@ -1,14 +1,11 @@
 package ru.ds.materialdesign.view.navigation
 
 
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 
-    const val EARTH_KEY = 0
+const val EARTH_KEY = 0
     const val MARS_KEY = 1
     const val SYSTEM_KEY = 2
 

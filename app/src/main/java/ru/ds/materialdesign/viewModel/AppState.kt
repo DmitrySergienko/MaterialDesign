@@ -1,8 +1,8 @@
 package ru.ds.materialdesign.viewModel
 
-import ru.ds.materialdesign.repository.pictureOfTheDay.PictureOfTheDayResponseData
 import ru.ds.materialdesign.repository.dto.mars.MarsPhotosServerResponseData
 import ru.ds.materialdesign.repository.epic.EarthEpicServerResponseData
+import ru.ds.materialdesign.repository.pictureOfTheDay.PictureOfTheDayResponseData
 
 //состояние нашего приложения
 sealed class AppState {
