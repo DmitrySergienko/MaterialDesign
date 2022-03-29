@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.ds.materialdesign.databinding.FragmenRecyclerItemEarthBinding
 import ru.ds.materialdesign.databinding.FragmentRecyclerItemHeaderBinding
 import ru.ds.materialdesign.databinding.FragmentRecyclerItemMarsBinding
-import android.view.MotionEvent
-import androidx.core.view.MotionEventCompat
 
 class RecyclerAdapter(val onClickItemListener: OnClickItemListener, val onStartDragListener: OnStartDragListener) :
         RecyclerView.Adapter<RecyclerAdapter.BaseViewHolder>(),
@@ -53,7 +51,7 @@ class RecyclerAdapter(val onClickItemListener: OnClickItemListener, val onStartD
 
     inner class MarsViewHolder(view: View) : BaseViewHolder(view),
             ItemTouchHelperViewHolder {
-        @SuppressLint("ClickableViewAccessibility")
+
         override fun bind(data: Pair<Data, Boolean>) {
             FragmentRecyclerItemMarsBinding.bind(itemView).apply {
                 tvName.text = data.first.name

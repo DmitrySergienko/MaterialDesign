@@ -11,18 +11,17 @@ import ru.ds.materialdesign.databinding.BottomNavigationLayoutBinding
 import ru.ds.materialdesign.view.layouts.LayoutActivity
 import ru.ds.materialdesign.view.navigation.BottomNavigationActivity
 import ru.ds.materialdesign.view.navigation.NavigationActivity
-import ru.ds.materialdesign.view.recycler.RecyclerFragment
 
 
-class BottomNavigationDriverFragment  : BottomSheetDialogFragment() {
+class BottomNavigationDriverFragment : BottomSheetDialogFragment() {
     private var _binding: BottomNavigationLayoutBinding? = null
     private val binding: BottomNavigationLayoutBinding
         get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = BottomNavigationLayoutBinding.inflate(inflater, container, false)
         return binding.root
@@ -30,27 +29,20 @@ class BottomNavigationDriverFragment  : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-            binding.navigationView.setNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.navigation_one->{
-                    startActivity(Intent(requireContext(),NavigationActivity::class.java))
+        binding.navigationView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.navigation_one -> {
+                    startActivity(Intent(requireContext(), NavigationActivity::class.java))
                 }
-                R.id.navigation_two->{
+                R.id.navigation_two -> {
                     startActivity(Intent(requireContext(), BottomNavigationActivity::class.java))
                 }
-                R.id.navigation_three->{
+                R.id.navigation_three -> {
                     startActivity(Intent(requireContext(), LayoutActivity::class.java))
                 }
-                R.id.navigation_four->{
-                    val manager = activity?.supportFragmentManager
-                    manager?.beginTransaction()
-                            ?.replace(R.id.container,RecyclerFragment.newInstance())
-                            ?.addToBackStack("_")
-                            ?.commitAllowingStateLoss()
 
-                }
             }
-                dismiss()
+            dismiss()
             true
         }
     }

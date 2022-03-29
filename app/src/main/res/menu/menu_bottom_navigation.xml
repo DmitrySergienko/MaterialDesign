@@ -13,9 +13,6 @@
             android:id="@+id/navigation_three"
             android:icon="@drawable/ic_send"
             android:title="LayoutActivity" />
-        <item
-            android:id="@+id/navigation_four"
-            android:icon="@drawable/ic_baseline_list_alt_24"
-            android:title="@string/recycler" />
+
     </group>
 </menu>

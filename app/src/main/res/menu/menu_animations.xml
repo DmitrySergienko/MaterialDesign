@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bottom_motion_animation"
+        android:title="@string/motion"
+        android:icon="@drawable/ic_baseline_animation_24"/>
+
+    <item
+        android:id="@+id/bottom_animations_zoom"
+        android:title="@string/animations"
+        android:icon="@drawable/ic_baseline_move_up_24"/>
+    <item
+        android:id="@+id/bottom_animations_explode"
+        android:title="@string/animations_explode"
+        android:icon="@drawable/ic_baseline_list_alt_24"/>
+
+
+</menu>
