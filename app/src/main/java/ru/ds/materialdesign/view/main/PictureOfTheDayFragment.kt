@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import coil.api.load
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -25,13 +26,17 @@ import ru.ds.materialdesign.view.MainActivity
 import ru.ds.materialdesign.view.animations.BottomNavigationDriverFragmentAnimation
 import ru.ds.materialdesign.view.chips.ChipsFragment
 import ru.ds.materialdesign.view.recycler.RecyclerFragment
+import ru.ds.materialdesign.view.text.TextFragment
 import ru.ds.materialdesign.viewModel.AppState
+import ru.ds.materialdesign.viewModel.DataModel
 import ru.ds.materialdesign.viewModel.PictureOfTheDayViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class PictureOfTheDayFragment : Fragment() {
+
+    private val dataModel: DataModel by activityViewModels()
     private var _binding: FragmentMainBinding? = null
     private val binding: FragmentMainBinding
         get() = _binding!!
@@ -67,7 +72,6 @@ class PictureOfTheDayFragment : Fragment() {
         setOnclickWiki() //вешаем слушатель на картинку Wiki
         themeSwitcher() //Black & White theme switch
         daySwitcher() //Yesterday or Today switcher
-
 
     }
 
@@ -203,12 +207,13 @@ class PictureOfTheDayFragment : Fragment() {
                     included.bottomSheetDescriptionHeader.text =
                             pictureOfTheDayState.serverResponseData.title
                     included.bottomSheetDescription.text =
-                            pictureOfTheDayState.serverResponseData.explanation}
-
+                            pictureOfTheDayState.serverResponseData.explanation
+                    dataModel.textDescriptionFromNASA.value= pictureOfTheDayState.serverResponseData.explanation}
             }
         }
 
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -247,6 +252,8 @@ class PictureOfTheDayFragment : Fragment() {
                         .commit()
 
             }
+
+
             android.R.id.home ->
                 BottomNavigationDriverFragment().show(requireActivity().supportFragmentManager, "")
         }
