@@ -1,7 +1,9 @@
 package ru.ds.materialdesign.view.main
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.transition.ChangeImageTransform
 import android.transition.TransitionManager
@@ -208,7 +210,10 @@ class PictureOfTheDayFragment : Fragment() {
                             pictureOfTheDayState.serverResponseData.title
                     included.bottomSheetDescription.text =
                             pictureOfTheDayState.serverResponseData.explanation
-                    dataModel.textDescriptionFromNASA.value= pictureOfTheDayState.serverResponseData.explanation}
+                    dataModel.textDescriptionFromNASA.value= pictureOfTheDayState.serverResponseData.explanation
+                    binding.included.bottomSheetDescription.text = "Тест тест тест ${pictureOfTheDayState.serverResponseData.explanation}"
+
+                }
             }
         }
 
