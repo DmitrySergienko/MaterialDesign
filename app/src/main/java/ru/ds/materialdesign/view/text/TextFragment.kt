@@ -14,6 +14,7 @@ import android.transition.ChangeImageTransform
 import android.transition.TransitionManager
 import android.view.*
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
@@ -69,11 +70,16 @@ class TextFragment : Fragment() {
            //          "folder1/Robus-BWqOd.otf")
            //  }
 
+
             val text = it
-            val spannableStringBuilder = SpannableStringBuilder(text)
+            var spannableStringBuilder = SpannableStringBuilder(text)
             val spannableString = SpannableString(text)
             val spannedString = SpannedString(spannableStringBuilder)
 
+            //работа с textView через буфер
+            binding.textDescription.setText(spannableStringBuilder, TextView.BufferType.EDITABLE)
+            //binding.included.bottomSheetDescription.setText(spannableString,TextView.BufferType.SPANNABLE)
+            spannableStringBuilder = binding.textDescription.text as SpannableStringBuilder
 
             spannableStringBuilder.setSpan(ForegroundColorSpan(ContextCompat.getColor(requireContext(),
                     R.color.colorAccent)), 0, spannableStringBuilder.length / 2,
