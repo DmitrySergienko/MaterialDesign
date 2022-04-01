@@ -155,7 +155,7 @@ class PictureOfTheDayFragment : Fragment() {
     private fun slideFabOnBottomBar() {
         binding.fab.setOnClickListener {
             if (isMain) {
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
                 binding.bottomAppBar.navigationIcon = null
                 binding.bottomAppBar.fabAlignmentMode =
                         BottomAppBar.FAB_ALIGNMENT_MODE_END // кнопку двигаем в конец
