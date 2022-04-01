@@ -121,5 +121,7 @@
     <string name="text">Text</string>
     <string name="text_ux">text_ux</string>
     <string name="buttons_ux">buttons_ux</string>
+    <string name="text_text_text">Text text text</string>
+    <string name="tutorial">Tutorial Buttons Text</string>
 
 </resources>

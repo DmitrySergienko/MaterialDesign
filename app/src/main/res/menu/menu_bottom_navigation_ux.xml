@@ -11,5 +11,10 @@
         android:icon="@drawable/ic_earth"
         app:tooltipText = "fragment_ux "
         android:title="@string/buttons_ux" />
+    <item
+        android:id="@+id/fragment_ux_tutorial"
+        android:icon="@drawable/ic_earth"
+        app:tooltipText = "fragment_ux "
+        android:title="ux_tutorial" />
 
 </menu>

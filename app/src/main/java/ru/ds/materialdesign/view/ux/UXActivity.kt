@@ -24,6 +24,9 @@ class UXActivity : AppCompatActivity() {
                 R.id.fragment_ux_button->{
                     navigateTo(ButtonUXFragment.newInstance())
                 }
+                R.id.fragment_ux_tutorial->{
+                    navigateTo(TutorialUXFragment.newInstance())
+                }
             }
             true
         }

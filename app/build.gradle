@@ -51,7 +51,10 @@ android {
 }
 
 dependencies {
-    //
+
+    //for tutorial
+    implementation 'com.github.mreram:showcaseview:1.4.0'
+    //Data Model
     implementation 'androidx.fragment:fragment-ktx:1.3.6'
 
     //UI
