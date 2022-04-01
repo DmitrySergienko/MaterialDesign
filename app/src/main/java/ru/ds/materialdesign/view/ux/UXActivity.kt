@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.ActivityUxBinding
-import ru.ds.materialdesign.view.ux.ButtonUXFragment
 
 class UXActivity : AppCompatActivity() {
     lateinit var binding: ActivityUxBinding

@@ -2,21 +2,14 @@ package ru.ds.materialdesign.view.ux
 
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
-import android.transition.ChangeImageTransform
-import android.transition.TransitionManager
-import android.view.*
-import android.widget.ImageView
-import android.widget.Toast
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import coil.api.load
 import ru.ds.materialdesign.R
-import ru.ds.materialdesign.databinding.FragmentMarsBinding
 import ru.ds.materialdesign.databinding.SplashFragmentBinding
-import ru.ds.materialdesign.utils.Constant.DURATION_CROP_ANIMATION_PICTURE
 import ru.ds.materialdesign.view.main.PictureOfTheDayFragment
-import ru.ds.materialdesign.viewModel.AppState
 import ru.ds.materialdesign.viewModel.MarsViewModel
 
 class SplashFragment : Fragment() {

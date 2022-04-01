@@ -1,17 +1,8 @@
 package ru.ds.materialdesign.view.main
 
 import android.content.Intent
-import android.graphics.Typeface
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.SpannableStringBuilder
-import android.text.SpannedString
-import android.text.style.BulletSpan
-import android.text.style.DynamicDrawableSpan
-import android.text.style.ForegroundColorSpan
-import android.text.style.ImageSpan
 import android.transition.ChangeImageTransform
 import android.transition.TransitionManager
 import android.util.Log
@@ -35,7 +26,6 @@ import ru.ds.materialdesign.view.MainActivity
 import ru.ds.materialdesign.view.animations.BottomNavigationDriverFragmentAnimation
 import ru.ds.materialdesign.view.chips.ChipsFragment
 import ru.ds.materialdesign.view.recycler.RecyclerFragment
-import ru.ds.materialdesign.view.text.TextFragment
 import ru.ds.materialdesign.viewModel.AppState
 import ru.ds.materialdesign.viewModel.DataModel
 import ru.ds.materialdesign.viewModel.PictureOfTheDayViewModel

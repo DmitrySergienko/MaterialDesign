@@ -4,8 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.ActivityMainBinding
-import ru.ds.materialdesign.databinding.SplashFragmentBinding
-import ru.ds.materialdesign.view.main.PictureOfTheDayFragment
 import ru.ds.materialdesign.view.ux.SplashFragment
 
 const val ThemeOne = 1
