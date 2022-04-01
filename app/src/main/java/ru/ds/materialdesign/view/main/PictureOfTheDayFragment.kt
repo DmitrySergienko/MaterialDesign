@@ -5,6 +5,13 @@ import android.graphics.Typeface
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.SpannedString
+import android.text.style.BulletSpan
+import android.text.style.DynamicDrawableSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.ImageSpan
 import android.transition.ChangeImageTransform
 import android.transition.TransitionManager
 import android.util.Log
@@ -190,28 +197,27 @@ class PictureOfTheDayFragment : Fragment() {
                 with(binding) {
                     mainFragmentLoadingLayout.visibility = View.VISIBLE
                     mainFragmentRoot.showSnackBar(
-                            "No server response",
-                            "Reloading",
-                            { viewModel.sendServerRequest() }
+                        "No server response",
+                        "Reloading",
+                        { viewModel.sendServerRequest() }
                     )
                 }
-             }
+            }
             is AppState.Loading -> {
-                 with(binding) {
-                     mainFragmentLoadingLayout.visibility = View.VISIBLE
+                with(binding) {
+                    mainFragmentLoadingLayout.visibility = View.VISIBLE
 
-                 }
+                }
             }
             is AppState.Success -> {
-                with(binding){
-                mainFragmentLoadingLayout.visibility = View.GONE
+                with(binding) {
+                    mainFragmentLoadingLayout.visibility = View.GONE
                     imageView.load(pictureOfTheDayState.serverResponseData.hdurl) //HD URL
                     included.bottomSheetDescriptionHeader.text =
-                            pictureOfTheDayState.serverResponseData.title
+                        pictureOfTheDayState.serverResponseData.title
                     included.bottomSheetDescription.text =
-                            pictureOfTheDayState.serverResponseData.explanation
+                        pictureOfTheDayState.serverResponseData.explanation
                     dataModel.textDescriptionFromNASA.value= pictureOfTheDayState.serverResponseData.explanation
-                    binding.included.bottomSheetDescription.text = "Тест тест тест ${pictureOfTheDayState.serverResponseData.explanation}"
 
                 }
             }
