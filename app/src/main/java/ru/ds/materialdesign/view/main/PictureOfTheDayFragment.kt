@@ -41,6 +41,7 @@ import ru.ds.materialdesign.viewModel.DataModel
 import ru.ds.materialdesign.viewModel.PictureOfTheDayViewModel
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Pattern
 
 
 class PictureOfTheDayFragment : Fragment() {
@@ -154,7 +155,7 @@ class PictureOfTheDayFragment : Fragment() {
     private fun slideFabOnBottomBar() {
         binding.fab.setOnClickListener {
             if (isMain) {
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
                 binding.bottomAppBar.navigationIcon = null
                 binding.bottomAppBar.fabAlignmentMode =
                         BottomAppBar.FAB_ALIGNMENT_MODE_END // кнопку двигаем в конец
@@ -270,6 +271,19 @@ class PictureOfTheDayFragment : Fragment() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    fun extractYTId(ytUrl: String?): String? {
+        var vId: String? = null
+        val pattern = Pattern.compile(
+                "^https?://.*(?:youtu.be/|v/|u/\\w/|embed/|watch?v=)([^#&?]*).*$",
+                Pattern.CASE_INSENSITIVE
+        )
+        val matcher = pattern.matcher(ytUrl)
+        if (matcher.matches()) {
+            vId = matcher.group(1)
+        }
+        return vId
     }
 
     override fun onDestroy() {
