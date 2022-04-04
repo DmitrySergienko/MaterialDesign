@@ -12,24 +12,13 @@ import smartdevelop.ir.eram.showcaseviewlib.config.Gravity
 import smartdevelop.ir.eram.showcaseviewlib.listener.GuideListener
 
 
-class TutorialUXFragment : Fragment() {
-    private var _binding: FragmentUxTutorialBinding? = null
-    private val binding: FragmentUxTutorialBinding
-        get() = _binding!!
+class TutorialUXFragment : ViewBindingFragment<FragmentUxTutorialBinding>(FragmentUxTutorialBinding::inflate) {
+
 
     companion object{
         fun newInstance() = TutorialUXFragment()
     }
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentUxTutorialBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,9 +52,4 @@ class TutorialUXFragment : Fragment() {
 
     }
 
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
 }
