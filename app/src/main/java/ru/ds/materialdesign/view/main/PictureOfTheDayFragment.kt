@@ -180,6 +180,21 @@ class PictureOfTheDayFragment : Fragment() {
         setHasOptionsMenu(true) // для отображения меню
         (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
     }
+    private fun showAVideoUrl(videoUrl: String) = with(binding) {
+
+            imageView.visibility = View.GONE
+            videoOfTheDay.visibility = View.VISIBLE
+            videoOfTheDay.text = "Сегодня у нас без картинки дня, но есть  видео дня! " +
+                    "${videoUrl.toString()} \n кликни >ЗДЕСЬ< чтобы открыть в новом окне"
+            videoOfTheDay.setOnClickListener {
+                val i = Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse(videoUrl)
+                }
+                startActivity(i)
+            }
+
+
+    }
 
 
     fun renderData(pictureOfTheDayState: AppState) {
@@ -203,12 +218,23 @@ class PictureOfTheDayFragment : Fragment() {
             is AppState.Success -> {
                 with(binding) {
                     mainFragmentLoadingLayout.visibility = View.GONE
-                    imageView.load(pictureOfTheDayState.serverResponseData.hdurl) //HD URL
-                    included.bottomSheetDescriptionHeader.text =
-                        pictureOfTheDayState.serverResponseData.title
-                    included.bottomSheetDescription.text =
-                        pictureOfTheDayState.serverResponseData.explanation
-                    dataModel.textDescriptionFromNASA.value= pictureOfTheDayState.serverResponseData.explanation
+                    if (pictureOfTheDayState.serverResponseData.mediaType == "video") {
+                        imageView.visibility = View.INVISIBLE
+                        included.bottomSheetDescription.visibility = View.GONE
+                        included.bottomSheetDescriptionHeader.visibility = View.GONE
+                        videoOfTheDay.visibility = View.VISIBLE
+                        showAVideoUrl(pictureOfTheDayState.serverResponseData.url)
+
+                    } else {
+                        videoOfTheDay.visibility = View.GONE
+                        imageView.load(pictureOfTheDayState.serverResponseData.hdurl) //HD URL
+                        included.bottomSheetDescriptionHeader.text =
+                            pictureOfTheDayState.serverResponseData.title
+                        included.bottomSheetDescription.text =
+                            pictureOfTheDayState.serverResponseData.explanation
+                        dataModel.textDescriptionFromNASA.value =
+                            pictureOfTheDayState.serverResponseData.explanation
+                    }
 
                 }
             }
