@@ -118,5 +118,6 @@
     <string name="explodeMenu">Explode</string>
     <string name="animations">Animatios zoom image</string>
     <string name="animations_explode">Animation Explode</string>
+    <string name="text">Text</string>
 
 </resources>

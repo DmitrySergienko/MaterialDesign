@@ -11,6 +11,7 @@ import ru.ds.materialdesign.databinding.BottomNavigationLayoutBinding
 import ru.ds.materialdesign.view.layouts.LayoutActivity
 import ru.ds.materialdesign.view.navigation.BottomNavigationActivity
 import ru.ds.materialdesign.view.navigation.NavigationActivity
+import ru.ds.materialdesign.view.text.TextFragment
 
 
 class BottomNavigationDriverFragment : BottomSheetDialogFragment() {
@@ -39,6 +40,13 @@ class BottomNavigationDriverFragment : BottomSheetDialogFragment() {
                 }
                 R.id.navigation_three -> {
                     startActivity(Intent(requireContext(), LayoutActivity::class.java))
+                }
+                R.id.app_bar_text -> {
+                    requireActivity().supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.container, TextFragment.newInstance())
+                            .addToBackStack("")
+                            .commit()
                 }
 
             }

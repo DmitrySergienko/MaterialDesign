@@ -13,6 +13,10 @@
             android:id="@+id/navigation_three"
             android:icon="@drawable/ic_send"
             android:title="LayoutActivity" />
+        <item
+            android:id="@+id/app_bar_text"
+            android:icon="@drawable/ic_baseline_text_fields_24"
+            android:title="@string/text" />
 
     </group>
 </menu>

@@ -1,8 +1,17 @@
 package ru.ds.materialdesign.view.main
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.SpannedString
+import android.text.style.BulletSpan
+import android.text.style.DynamicDrawableSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.ImageSpan
 import android.transition.ChangeImageTransform
 import android.transition.TransitionManager
 import android.util.Log
@@ -13,6 +22,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import coil.api.load
 import com.google.android.material.bottomappbar.BottomAppBar
@@ -25,13 +35,17 @@ import ru.ds.materialdesign.view.MainActivity
 import ru.ds.materialdesign.view.animations.BottomNavigationDriverFragmentAnimation
 import ru.ds.materialdesign.view.chips.ChipsFragment
 import ru.ds.materialdesign.view.recycler.RecyclerFragment
+import ru.ds.materialdesign.view.text.TextFragment
 import ru.ds.materialdesign.viewModel.AppState
+import ru.ds.materialdesign.viewModel.DataModel
 import ru.ds.materialdesign.viewModel.PictureOfTheDayViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class PictureOfTheDayFragment : Fragment() {
+
+    private val dataModel: DataModel by activityViewModels()
     private var _binding: FragmentMainBinding? = null
     private val binding: FragmentMainBinding
         get() = _binding!!
@@ -67,7 +81,6 @@ class PictureOfTheDayFragment : Fragment() {
         setOnclickWiki() //вешаем слушатель на картинку Wiki
         themeSwitcher() //Black & White theme switch
         daySwitcher() //Yesterday or Today switcher
-
 
     }
 
@@ -184,31 +197,34 @@ class PictureOfTheDayFragment : Fragment() {
                 with(binding) {
                     mainFragmentLoadingLayout.visibility = View.VISIBLE
                     mainFragmentRoot.showSnackBar(
-                            "No server response",
-                            "Reloading",
-                            { viewModel.sendServerRequest() }
+                        "No server response",
+                        "Reloading",
+                        { viewModel.sendServerRequest() }
                     )
                 }
-             }
+            }
             is AppState.Loading -> {
-                 with(binding) {
-                     mainFragmentLoadingLayout.visibility = View.VISIBLE
+                with(binding) {
+                    mainFragmentLoadingLayout.visibility = View.VISIBLE
 
-                 }
+                }
             }
             is AppState.Success -> {
-                with(binding){
-                mainFragmentLoadingLayout.visibility = View.GONE
+                with(binding) {
+                    mainFragmentLoadingLayout.visibility = View.GONE
                     imageView.load(pictureOfTheDayState.serverResponseData.hdurl) //HD URL
                     included.bottomSheetDescriptionHeader.text =
-                            pictureOfTheDayState.serverResponseData.title
+                        pictureOfTheDayState.serverResponseData.title
                     included.bottomSheetDescription.text =
-                            pictureOfTheDayState.serverResponseData.explanation}
+                        pictureOfTheDayState.serverResponseData.explanation
+                    dataModel.textDescriptionFromNASA.value= pictureOfTheDayState.serverResponseData.explanation
 
+                }
             }
         }
 
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -247,6 +263,8 @@ class PictureOfTheDayFragment : Fragment() {
                         .commit()
 
             }
+
+
             android.R.id.home ->
                 BottomNavigationDriverFragment().show(requireActivity().supportFragmentManager, "")
         }
