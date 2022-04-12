@@ -119,5 +119,9 @@
     <string name="animations">Animatios zoom image</string>
     <string name="animations_explode">Animation Explode</string>
     <string name="text">Text</string>
+    <string name="text_ux">text_ux</string>
+    <string name="buttons_ux">buttons_ux</string>
+    <string name="text_text_text">Text text text</string>
+    <string name="tutorial">Tutorial Buttons Text</string>
 
 </resources>

@@ -12,6 +12,7 @@ import ru.ds.materialdesign.view.layouts.LayoutActivity
 import ru.ds.materialdesign.view.navigation.BottomNavigationActivity
 import ru.ds.materialdesign.view.navigation.NavigationActivity
 import ru.ds.materialdesign.view.text.TextFragment
+import ru.ds.materialdesign.view.ux.UXActivity
 
 
 class BottomNavigationDriverFragment : BottomSheetDialogFragment() {
@@ -47,6 +48,9 @@ class BottomNavigationDriverFragment : BottomSheetDialogFragment() {
                             .replace(R.id.container, TextFragment.newInstance())
                             .addToBackStack("")
                             .commit()
+                }
+                R.id.app_bar_tutorial -> {
+                    startActivity(Intent(requireContext(), UXActivity::class.java))
                 }
 
             }

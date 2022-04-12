@@ -1,17 +1,8 @@
 package ru.ds.materialdesign.view.main
 
 import android.content.Intent
-import android.graphics.Typeface
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.SpannableStringBuilder
-import android.text.SpannedString
-import android.text.style.BulletSpan
-import android.text.style.DynamicDrawableSpan
-import android.text.style.ForegroundColorSpan
-import android.text.style.ImageSpan
 import android.transition.ChangeImageTransform
 import android.transition.TransitionManager
 import android.util.Log
@@ -35,12 +26,12 @@ import ru.ds.materialdesign.view.MainActivity
 import ru.ds.materialdesign.view.animations.BottomNavigationDriverFragmentAnimation
 import ru.ds.materialdesign.view.chips.ChipsFragment
 import ru.ds.materialdesign.view.recycler.RecyclerFragment
-import ru.ds.materialdesign.view.text.TextFragment
 import ru.ds.materialdesign.viewModel.AppState
 import ru.ds.materialdesign.viewModel.DataModel
 import ru.ds.materialdesign.viewModel.PictureOfTheDayViewModel
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.regex.Pattern
 
 
 class PictureOfTheDayFragment : Fragment() {
@@ -189,6 +180,21 @@ class PictureOfTheDayFragment : Fragment() {
         setHasOptionsMenu(true) // для отображения меню
         (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
     }
+    private fun showAVideoUrl(videoUrl: String) = with(binding) {
+
+            imageView.visibility = View.GONE
+            videoOfTheDay.visibility = View.VISIBLE
+            videoOfTheDay.text = "Сегодня у нас без картинки дня, но есть  видео дня! " +
+                    "${videoUrl.toString()} \n кликни >ЗДЕСЬ< чтобы открыть в новом окне"
+            videoOfTheDay.setOnClickListener {
+                val i = Intent(Intent.ACTION_VIEW).apply {
+                    data = Uri.parse(videoUrl)
+                }
+                startActivity(i)
+            }
+
+
+    }
 
 
     fun renderData(pictureOfTheDayState: AppState) {
@@ -212,12 +218,23 @@ class PictureOfTheDayFragment : Fragment() {
             is AppState.Success -> {
                 with(binding) {
                     mainFragmentLoadingLayout.visibility = View.GONE
-                    imageView.load(pictureOfTheDayState.serverResponseData.hdurl) //HD URL
-                    included.bottomSheetDescriptionHeader.text =
-                        pictureOfTheDayState.serverResponseData.title
-                    included.bottomSheetDescription.text =
-                        pictureOfTheDayState.serverResponseData.explanation
-                    dataModel.textDescriptionFromNASA.value= pictureOfTheDayState.serverResponseData.explanation
+                    if (pictureOfTheDayState.serverResponseData.mediaType == "video") {
+                        imageView.visibility = View.INVISIBLE
+                        included.bottomSheetDescription.visibility = View.GONE
+                        included.bottomSheetDescriptionHeader.visibility = View.GONE
+                        videoOfTheDay.visibility = View.VISIBLE
+                        showAVideoUrl(pictureOfTheDayState.serverResponseData.url)
+
+                    } else {
+                        videoOfTheDay.visibility = View.GONE
+                        imageView.load(pictureOfTheDayState.serverResponseData.hdurl) //HD URL
+                        included.bottomSheetDescriptionHeader.text =
+                            pictureOfTheDayState.serverResponseData.title
+                        included.bottomSheetDescription.text =
+                            pictureOfTheDayState.serverResponseData.explanation
+                        dataModel.textDescriptionFromNASA.value =
+                            pictureOfTheDayState.serverResponseData.explanation
+                    }
 
                 }
             }
@@ -270,6 +287,19 @@ class PictureOfTheDayFragment : Fragment() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    fun extractYTId(ytUrl: String?): String? {
+        var vId: String? = null
+        val pattern = Pattern.compile(
+                "^https?://.*(?:youtu.be/|v/|u/\\w/|embed/|watch?v=)([^#&?]*).*$",
+                Pattern.CASE_INSENSITIVE
+        )
+        val matcher = pattern.matcher(ytUrl)
+        if (matcher.matches()) {
+            vId = matcher.group(1)
+        }
+        return vId
     }
 
     override fun onDestroy() {

@@ -3,12 +3,12 @@
 
     //unique style for FAB
     <style name="myFloatingActionButtonStyle" parent="Widget.MaterialComponents.FloatingActionButton">
-        <item name="backgroundTint">#5879F3</item>
+        <item name="backgroundTint">@color/colorPrimaryDarkBlue</item>
     </style>
 
     //unique style for BottomAppBar
     <style name="myBottomAppBarStyle" parent="Widget.MaterialComponents.BottomAppBar">
-        <item name="backgroundTint">@color/purple_700</item>
+        <item name="backgroundTint">@color/colorPrimaryDarkBlue</item>
     </style>
 
     //unique style for Chips

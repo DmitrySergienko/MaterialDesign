@@ -1,37 +1,26 @@
 package ru.ds.materialdesign.view.text
 
-import android.graphics.Typeface
+
 import android.os.Build
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.SpannedString
-import android.text.style.BulletSpan
 import android.text.style.DynamicDrawableSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.ImageSpan
-import android.transition.ChangeImageTransform
-import android.transition.TransitionManager
-import android.view.*
-import android.widget.ImageView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.ViewModelProvider
-import coil.api.load
 import ru.ds.materialdesign.R
-import ru.ds.materialdesign.databinding.FragmentMarsBinding
 import ru.ds.materialdesign.databinding.FragmentTextBinding
-import ru.ds.materialdesign.utils.Constant.DURATION_CROP_ANIMATION_PICTURE
-import ru.ds.materialdesign.utils.showSnackBar
-import ru.ds.materialdesign.view.main.PictureOfTheDayFragment
-import ru.ds.materialdesign.viewModel.AppState
 import ru.ds.materialdesign.viewModel.DataModel
-import ru.ds.materialdesign.viewModel.MarsViewModel
 
 class TextFragment : Fragment() {
     private val dataModel: DataModel by activityViewModels()

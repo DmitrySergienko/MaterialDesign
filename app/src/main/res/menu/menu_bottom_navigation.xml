@@ -17,6 +17,10 @@
             android:id="@+id/app_bar_text"
             android:icon="@drawable/ic_baseline_text_fields_24"
             android:title="@string/text" />
+        <item
+            android:id="@+id/app_bar_tutorial"
+            android:icon="@drawable/ic_baseline_text_fields_24"
+            android:title="@string/tutorial" />
 
     </group>
 </menu>
