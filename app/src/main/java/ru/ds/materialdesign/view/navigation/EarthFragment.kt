@@ -16,7 +16,6 @@ import ru.ds.materialdesign.BuildConfig
 import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.FragmentEarthBinding
 import ru.ds.materialdesign.utils.Constant
-import ru.ds.materialdesign.view.MainActivity
 import ru.ds.materialdesign.viewModel.AppState
 import ru.ds.materialdesign.viewModel.EpicViewModel
 

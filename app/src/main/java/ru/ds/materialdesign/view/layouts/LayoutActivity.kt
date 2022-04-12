@@ -7,7 +7,6 @@ import ru.ds.materialdesign.R
 import ru.ds.materialdesign.databinding.ActivityLayoutBinding
 import ru.ds.materialdesign.view.layouts.constraint.ConstraintFragment
 import ru.ds.materialdesign.view.layouts.coordinator.CoordinatorFragment
-import ru.ds.materialdesign.view.layouts.explode.ExplodeFragment
 import ru.ds.materialdesign.view.layouts.motion.MotionFragment
 
 
@@ -37,10 +36,7 @@ class LayoutActivity : AppCompatActivity() {
                     navigationTo(MotionFragment())
                     true
                 }
-                R.id.bottom_explode -> {
-                    navigationTo(ExplodeFragment())
-                    true
-                }
+
                 else -> true
             }
         }

@@ -22,7 +22,9 @@ import ru.ds.materialdesign.databinding.FragmentMainBinding
 import ru.ds.materialdesign.utils.Constant.DURATION_CROP_ANIMATION_PICTURE
 import ru.ds.materialdesign.utils.showSnackBar
 import ru.ds.materialdesign.view.MainActivity
+import ru.ds.materialdesign.view.animations.BottomNavigationDriverFragmentAnimation
 import ru.ds.materialdesign.view.chips.ChipsFragment
+import ru.ds.materialdesign.view.recycler.RecyclerFragment
 import ru.ds.materialdesign.viewModel.AppState
 import ru.ds.materialdesign.viewModel.PictureOfTheDayViewModel
 import java.text.SimpleDateFormat
@@ -224,14 +226,25 @@ class PictureOfTheDayFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.app_bar_fav -> Toast.makeText(requireContext(), "app_bar_fav", Toast.LENGTH_SHORT)
-                    .show()
+            R.id.app_bar_fav ->{
+                BottomNavigationDriverFragmentAnimation().show(requireActivity().supportFragmentManager, "")
+            }
             R.id.app_bar_settings -> {
-                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container, ChipsFragment.newInstance())
+                requireActivity().supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.container, ChipsFragment.newInstance())
                         .addToBackStack("")
                         .commit()
                 Toast.makeText(requireContext(), "app_bar_fav", Toast.LENGTH_SHORT)
                         .show()
+
+            }
+            R.id.app_bar_recycler -> {
+                requireActivity().supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.container, RecyclerFragment.newInstance())
+                        .addToBackStack("")
+                        .commit()
 
             }
             android.R.id.home ->

@@ -13,16 +13,15 @@ import ru.ds.materialdesign.view.navigation.BottomNavigationActivity
 import ru.ds.materialdesign.view.navigation.NavigationActivity
 
 
-class BottomNavigationDriverFragment  : BottomSheetDialogFragment() {
+class BottomNavigationDriverFragment : BottomSheetDialogFragment() {
     private var _binding: BottomNavigationLayoutBinding? = null
     private val binding: BottomNavigationLayoutBinding
         get() = _binding!!
 
-
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View {
         _binding = BottomNavigationLayoutBinding.inflate(inflater, container, false)
         return binding.root
@@ -30,18 +29,20 @@ class BottomNavigationDriverFragment  : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-            binding.navigationView.setNavigationItemSelectedListener {
-            when(it.itemId){
-                R.id.navigation_one->{
-                    startActivity(Intent(requireContext(),NavigationActivity::class.java))
+        binding.navigationView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.navigation_one -> {
+                    startActivity(Intent(requireContext(), NavigationActivity::class.java))
                 }
-                R.id.navigation_two->{
+                R.id.navigation_two -> {
                     startActivity(Intent(requireContext(), BottomNavigationActivity::class.java))
                 }
-                R.id.navigation_three->{
+                R.id.navigation_three -> {
                     startActivity(Intent(requireContext(), LayoutActivity::class.java))
                 }
+
             }
+            dismiss()
             true
         }
     }
