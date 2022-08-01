@@ -15,7 +15,7 @@ import ru.ds.materialdesign.utils.Constant.DURATION_CROP_ANIMATION_PICTURE
 import ru.ds.materialdesign.viewModel.AppState
 import ru.ds.materialdesign.viewModel.MarsViewModel
 
-class MarsFragment : Fragment() {
+class   MarsFragment : Fragment() {
 
     var flag = false
 
